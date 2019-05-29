@@ -11,7 +11,7 @@ oms
 |--portal 前端业务  
 |--core 核心业务  
 |--common 公共bean、util  
-|--account 账户服务：单点、权限控制
+|--account 账户服务：单点、登录服务
 
 
 技术选型：  
