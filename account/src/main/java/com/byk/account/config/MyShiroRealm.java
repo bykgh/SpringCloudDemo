@@ -15,8 +15,6 @@ public class MyShiroRealm extends AuthorizingRealm {
     private SecurityShiroService securityShiroService;
  
     @Override
- 
-
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
        SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
        User user =(User) principals.getPrimaryPrincipal();

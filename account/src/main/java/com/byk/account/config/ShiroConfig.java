@@ -1,8 +1,21 @@
 package com.byk.account.config;
 
+import org.apache.shiro.authc.credential.HashedCredentialsMatcher;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
+import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.web.mgt.CookieRememberMeManager;
+import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
+import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.handler.SimpleMappingExceptionResolver;
+
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Properties;
 
 @Configuration
 public class ShiroConfig {
@@ -143,7 +156,7 @@ public class ShiroConfig {
         r.setExceptionMappings(mappings); // None by default
         r.setDefaultErrorView("error"); // No default
         r.setExceptionAttribute("ex"); // Default is "exception"
-// r.setWarnLogCategory("example.MvcLogger"); // No default
+        // r.setWarnLogCategory("example.MvcLogger"); // No default
         return r;
     }
 }
