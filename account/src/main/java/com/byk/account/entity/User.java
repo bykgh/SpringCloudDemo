@@ -1,11 +1,18 @@
 package com.byk.account.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EntityListeners;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name="sys_user")
+@EntityListeners(AuditingEntityListener.class)
 public class User extends AutoIDEntity{
     /**
      * 账号
@@ -36,6 +43,18 @@ public class User extends AutoIDEntity{
      * 是否锁定
      */
     private String locked;
+
+    /**
+     * 创建时间
+     */
+    @CreatedDate
+    private Date createTime;
+
+    /**
+     * 更新时间
+     */
+    @LastModifiedDate
+    private Date updateTime;
 
     @Column(name="user_code")
     public String getUserCode() {
@@ -89,5 +108,23 @@ public class User extends AutoIDEntity{
 
     public void setLocked(String locked) {
         this.locked = locked;
+    }
+
+    @Column(name="create_time", columnDefinition = "DATE")
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
+    @Column(name="update_time", columnDefinition = "DATE")
+    public Date getUpdateTime() {
+        return updateTime;
+    }
+
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
     }
 }
