@@ -1,5 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://shiro.apache.org/tags" prefix="shiro" %>
 <!DOCTYPE html>
-<!-- saved from url=(0039)https://v3.bootcss.com/examples/signin/ -->
 <html lang="zh-CN">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -14,11 +16,11 @@
         <title>Signin Template for Bootstrap</title>
 
         <!-- Bootstrap core CSS -->
-        <link href="../static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="../static/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
-        <link href="../static/css/signin.css" rel="stylesheet">
-        <script src="../static/bootstrap/js/jquery.min.js"></script>
-        <script src="../static/bootstrap/js/bootstrap.min.js"></script>
+        <link href="../portal/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link href="../portal/static/bootstrap/css/bootstrap-theme.min.css" rel="stylesheet">
+        <link href="../portal/static/css/signin.css" rel="stylesheet">
+        <script src="../portal/static/bootstrap/js/jquery.min.js"></script>
+        <script src="../portal/static/bootstrap/js/bootstrap.min.js"></script>
 
   </head>
 
@@ -39,7 +41,7 @@
             </div>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
           </form>
-        </div> <!-- /container -->
+        </div>
 
   </body>
 </html>

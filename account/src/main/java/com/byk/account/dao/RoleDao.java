@@ -1,4 +1,6 @@
 package com.byk.account.dao;
 
-public interface RoleDao extends BaseDao<RoleDao,Long>{
+import com.byk.account.entity.Role;
+
+public interface RoleDao extends BaseDao<Role,Long>{
 }

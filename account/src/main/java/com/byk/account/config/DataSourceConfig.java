@@ -64,6 +64,7 @@ public class DataSourceConfig {
     }
 
     @Bean
+    @Primary
     @ConfigurationProperties(prefix="spring.datasource")
     public DataSourceProperties omsDataSourceProperties() { //2
         return new DataSourceProperties();
