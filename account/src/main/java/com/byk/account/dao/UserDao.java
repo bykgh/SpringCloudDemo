@@ -1,4 +1,6 @@
 package com.byk.account.dao;
 
-public interface UserDao {
+import com.byk.account.entity.User;
+
+public interface UserDao extends BaseDao<User,Long>{
 }

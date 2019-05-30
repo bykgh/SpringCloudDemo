@@ -1,9 +1,12 @@
 package com.byk.account.entity;
 
-public class Permission {
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Table;
 
-    private Integer id;
-    private Integer optimistic;
+@Entity
+@Table(name="sys_permission")
+public class Permission extends AutoIDEntity{
 
     /**
      * 资源名称
@@ -28,7 +31,7 @@ public class Permission {
     /**
      *父结点id
      */
-    private String parentid;
+    private Integer parentid;
 
     /**
      *父结点id列表串
@@ -46,6 +49,7 @@ public class Permission {
     private String available;
 
 
+    @Column(name="name")
     public String getName() {
         return name;
     }
@@ -54,6 +58,7 @@ public class Permission {
         this.name = name;
     }
 
+    @Column(name="type")
     public String getType() {
         return type;
     }
@@ -62,6 +67,7 @@ public class Permission {
         this.type = type;
     }
 
+    @Column(name="url")
     public String getUrl() {
         return url;
     }
@@ -70,6 +76,7 @@ public class Permission {
         this.url = url;
     }
 
+    @Column(name="permission_code")
     public String getPercode() {
         return percode;
     }
@@ -78,14 +85,16 @@ public class Permission {
         this.percode = percode;
     }
 
-    public String getParentid() {
+    @Column(name="parent_id")
+    public Integer getParentid() {
         return parentid;
     }
 
-    public void setParentid(String parentid) {
+    public void setParentid(Integer parentid) {
         this.parentid = parentid;
     }
 
+    @Column(name="parent_ids")
     public String getParentids() {
         return parentids;
     }
@@ -94,6 +103,7 @@ public class Permission {
         this.parentids = parentids;
     }
 
+    @Column(name="sortstring")
     public String getSortstring() {
         return sortstring;
     }
@@ -102,6 +112,7 @@ public class Permission {
         this.sortstring = sortstring;
     }
 
+    @Column(name="available")
     public String getAvailable() {
         return available;
     }

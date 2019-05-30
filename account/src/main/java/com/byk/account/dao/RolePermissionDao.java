@@ -1,4 +1,6 @@
 package com.byk.account.dao;
 
-public interface RolePermissionDao {
+import com.byk.account.entity.RolePermission;
+
+public interface RolePermissionDao extends BaseDao<RolePermission,Long>{
 }
