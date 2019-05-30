@@ -2,16 +2,17 @@
 运营管理系统
 
 目的:  
-用于个人学习和技能展示
+用于个人学习，技术整理总结
 
 项目结构:  
 oms  
+|--doc 文档、sql  
 |--refistry 注册中心  
 |--geteway 网关  
 |--portal 前端业务  
 |--core 核心业务  
 |--common 公共bean、util  
-|--account 账户服务：单点、认证服务
+|--account 单点、认证服务
 
 
 技术选型：  
@@ -21,9 +22,10 @@ oms
  thymeleaf
  
 后端：  
-spring cloud 2.5 框架  
+spring cloud 2.5   
+spring boot  
 redis  缓存  
-shiro  权限控制  
+OAuth2  权限控制，shiro似乎不适合用来做分布式权限管理  
 spring data jpa 持久化
 
 数据库：  
