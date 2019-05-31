@@ -12,7 +12,8 @@ oms
 |--portal 前端业务  
 |--core 核心业务  
 |--common 公共bean、util  
-|--account 单点、认证服务
+|--account 单点、认证服务  
+|--config 配重中心
 
 
 技术选型：  
@@ -25,7 +26,8 @@ oms
 spring cloud 2.5   
 spring boot  
 redis  缓存  
-OAuth2  权限控制，shiro似乎不适合用来做分布式权限管理  
+OAuth2  权限控制，shiro似乎不适合用来做分布式权限    
+Security-OAuth2 密码模式  
 spring data jpa 持久化
 
 数据库：  

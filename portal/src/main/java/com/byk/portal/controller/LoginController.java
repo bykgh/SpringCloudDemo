@@ -1,11 +1,6 @@
 package com.byk.portal.controller;
 
-import com.byk.common.beans.UserBean;
-import com.byk.common.util.Md5Util;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
-import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authc.UsernamePasswordToken;
-import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
