@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="false">
+    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
+    <property name="LOG_HOME" value="${catalina.home}/logs"/>
+    <!-- 控制台输出 -->
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 -->
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread-%X{traceId}] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+<!--
+    &lt;!&ndash; 按照每天生成日志文件 &ndash;&gt;
+    <appender name="DSP" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_HOME}/dsp_log.txt</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            &lt;!&ndash;日志文件输出的文件名 &ndash;&gt;
+            <FileNamePattern>${LOG_HOME}/dsp_log.%d{yyyy-MM-dd}.txt
+            </FileNamePattern>
+            &lt;!&ndash;日志文件保留天数 &ndash;&gt;
+            <MaxHistory>90</MaxHistory>
+        </rollingPolicy>
+        <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            &lt;!&ndash;格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符 &ndash;&gt;
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="com.pay.dsp" level="INFO" additivity="false">
+        <appender-ref ref="DSP"/>
+    </logger>
+-->
+
+    <logger name="org.hibernate" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="INFO" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- 如果要打印sql，将 level 设为 debug -->
+    <logger name="org.hibernate.SQL" level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- 如果要开启参数值跟踪，将 level 设为 trace -->
+    <logger name="org.hibernate.type" level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>
