@@ -2,6 +2,7 @@ package com.byk.portal.controller;
 
 import com.byk.common.beans.UserBean;
 import com.byk.common.util.Md5Util;
+import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
@@ -23,24 +24,10 @@ public class LoginController {
     }
 
     @RequestMapping(value="/loginSubmit",method=RequestMethod.GET)
+    @HystrixCommand(fallbackMethod = "loginError")
     public String loginSubmit(){
-        Subject subject = SecurityUtils.getSubject();//获取当前用户对象
-        //生成令牌(传入用户输入的账号和密码)
-        UsernamePasswordToken token=new UsernamePasswordToken("1111", Md5Util.getMd5Str("11111"));
 
-        //认证登录
-        try {
-            //这里会加载自定义的realm
-            subject.login(token);//把令牌放到login里面进行查询,如果查询账号和密码时候匹配,如果匹配就把user对象获取出来,失败就抛异常
-            UserBean user= (UserBean) subject.getPrincipal();//获取登录成功的用户对象(以前是直接去service里面查)
-            //ServletActionContext.getRequest().getSession().setAttribute("user", user);
-            return "index";
-        } catch (Exception e) {
-            //认证登录失败抛出异常
-            //addActionError("用户名和密码不匹配...");
-            logger.error("认证失败");
-            return "login";
-        }
+        return "index";
     }
 
     @RequestMapping(value="/loginSuccess",method=RequestMethod.GET)
