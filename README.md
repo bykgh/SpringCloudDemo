@@ -13,7 +13,7 @@ oms
 |--core 核心业务  
 |--common 公共bean、util  
 |--account 单点、认证服务  
-|--config 配重中心
+|--config 配置中心
 
 
 技术选型：  
