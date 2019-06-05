@@ -5,11 +5,10 @@ import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 import org.springframework.stereotype.Component;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name="sys_user")
@@ -56,6 +55,11 @@ public class User extends AutoIDEntity{
      */
     @LastModifiedDate
     private Date updateTime;
+
+    /**
+     * 一对多角色表
+     */
+    private List<Role> roles ;
 
     @Column(name="user_code")
     public String getUserCode() {
@@ -127,5 +131,17 @@ public class User extends AutoIDEntity{
 
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
+    }
+
+    @ManyToMany(cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @JoinTable(name = "sys_user_srole",
+            joinColumns = @JoinColumn(name="sys_user_id",referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "sys_role_id",referencedColumnName = "id"))
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
     }
 }

@@ -13,7 +13,7 @@ oms
 |--portal 前端业务  
 |--core 核心业务  
 |--common 公共bean、util  
-|--account 单点、认证服务  
+|--account 单点、认证服务、用户信息相关服务  
 |--config 配置中心
 
 
@@ -24,7 +24,7 @@ oms
  thymeleaf
  
 后端：  
-spring cloud 2.5   
+spring cloud   
 spring boot  
 redis  缓存  
 OAuth2  权限控制，shiro似乎不适合用来做分布式权限    
