@@ -15,7 +15,7 @@ public class LoginController {
     @RequestMapping(value="/login",method=RequestMethod.GET)
     public String login(){
         logger.info("跳转到登录页面");
-        return "login";
+        return "login/login";
     }
 
     @RequestMapping(value="/loginSubmit",method=RequestMethod.GET)
@@ -28,12 +28,12 @@ public class LoginController {
     @RequestMapping(value="/loginSuccess",method=RequestMethod.GET)
     public String loginSuccess(){
         logger.info("跳转到登录页面");
-        return "loginSuccess";
+        return "login/loginSuccess";
     }
 
     @RequestMapping(value="/loginError",method=RequestMethod.GET)
     public String loginError(){
         logger.info("跳转到登录页面");
-        return "loginError";
+        return "login/loginError";
     }
 }

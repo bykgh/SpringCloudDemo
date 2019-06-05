@@ -7,8 +7,9 @@
 项目结构:  
 oms  
 |--doc 文档、sql  
+|--config-repo 注册中心配置文件资源  
 |--refistry 注册中心  
-|--geteway 网关  
+|--gateway 网关（spring gateway)  
 |--portal 前端业务  
 |--core 核心业务  
 |--common 公共bean、util  
