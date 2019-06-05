@@ -1,4 +1,4 @@
-package com.byk.geteway.config;
+package com.byk.gateway.config;
 
 //import org.springframework.beans.factory.annotation.Qualifier;
 //import org.springframework.boot.autoconfigure.jdbc.DataSourceBuilder;

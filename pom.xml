@@ -12,6 +12,7 @@
     <artifactId>oms</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>oms</name>
+    <packaging>pom</packaging>
     <description>oms project for Spring Boot</description>
 
     <properties>
@@ -32,7 +33,7 @@
         <!-- 主要功能 -->
         <module>core</module>
         <!-- 网关 -->
-        <module>geteway</module>
+        <module>gateway</module>
         <!-- 账户管理 -->
         <module>account</module>
         <!-- 公共服务 -->

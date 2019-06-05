@@ -1,4 +1,4 @@
-package com.byk.geteway.config;
+package com.byk.gateway.config;
 
 import cn.xudy.sso.Tool.MyAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
