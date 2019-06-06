@@ -18,7 +18,7 @@ public class UserController {
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
 
-    @GetMapping("/principal")
+    @GetMapping("/userinfo")
     public Principal principal(Principal principal) {
         return principal;
     }
