@@ -1,11 +1,14 @@
 package com.byk.gateway;
 
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.client.SpringCloudApplication;
+import org.springframework.context.annotation.ComponentScan;
 
-@SpringCloudApplication
+@SpringBootApplication
 @EnableOAuth2Sso
+@ComponentScan(basePackages = {"org.springframework.http.codec"})
 public class GatewayApplication {
 
     public static void main(String[] args) {
