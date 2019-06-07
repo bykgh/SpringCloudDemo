@@ -2,6 +2,7 @@ package com.byk.portal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
 import org.springframework.cloud.client.SpringCloudApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
@@ -19,6 +20,7 @@ public class PortalApplication {
         SpringApplication.run(PortalApplication.class, args);
     }
 
+    /**
     @Bean
     public InternalResourceViewResolver setupViewResolver(){
         InternalResourceViewResolver resolver = new InternalResourceViewResolver();
@@ -26,5 +28,5 @@ public class PortalApplication {
         resolver.setSuffix(".jsp");
         return resolver;
     }
-
+    */
 }

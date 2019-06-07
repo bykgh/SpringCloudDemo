@@ -27,6 +27,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return super.authenticationManagerBean();
     }
 
+
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -48,14 +50,43 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * 注意在配置 /check_token 这个链接端点的时候，使用 check-token-enabled 属性标记启用。
      * @param http
      * @throws Exception
+
+        protected void configure(HttpSecurity http) throws Exception {
+            http .authorizeRequests().antMatchers("/login").permitAll().and()
+                    // default protection for all resources (including /oauth/authorize)
+                    .authorizeRequests() .anyRequest().hasRole("USER");
+            // ... more configuration, e.g. for form login
+        }
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http .authorizeRequests().antMatchers("/login").permitAll().and()
-                // default protection for all resources (including /oauth/authorize)
-                .authorizeRequests() .anyRequest().hasRole("USER");
-        // ... more configuration, e.g. for form login
+        http.requestMatchers().antMatchers("/oauth/**")
+                .and()
+
+
+                .authorizeRequests()
+                //静态资源直接访问
+                .antMatchers("/","/portal/api/login**","/portal/templates/**","/portal/static/**").permitAll()
+                .antMatchers(org.springframework.http.HttpMethod.GET).permitAll()
+                //登录地址允许匿名访问
+                .antMatchers("/portal/api//login**").anonymous()
+                .antMatchers("/oauth/**").authenticated()
+                .anyRequest().authenticated()
+                .and()
+
+
+                .formLogin()
+                .loginPage("/portal/api/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                .loginProcessingUrl("/authentication/form")
+                .failureForwardUrl("/portal/api/loginError")
+                .successForwardUrl("/portal/api/loginSubmit")
+                .permitAll()
+                .and()
+                .csrf().disable();
     }
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {

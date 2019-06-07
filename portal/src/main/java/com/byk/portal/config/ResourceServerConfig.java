@@ -18,10 +18,12 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint((request, response, authException) -> response.sendError(HttpServletResponse.SC_UNAUTHORIZED))
                 .and()
-                .requestMatchers().antMatchers("/**")
+                .requestMatchers().antMatchers("/api/**")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/**").authenticated()
+                .antMatchers("/api/**").authenticated()
+                .and()
+                .authorizeRequests().antMatchers("/api/login","/templates/**","/static/**").permitAll().anyRequest().authenticated()
                 .and()
                 .httpBasic();
     }

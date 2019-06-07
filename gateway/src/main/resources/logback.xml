@@ -10,17 +10,17 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework.web" level="INFO" additivity="false">
+    <logger name="org.springframework.web" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="org.springframework.cloud.gateway" level="debug" additivity="false">
+    <logger name="org.springframework.cloud.gateway" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
 
     <!-- 日志输出级别 -->
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

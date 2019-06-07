@@ -1,11 +1,13 @@
 package com.byk.account.security;
 
 
+import com.byk.account.error.MssWebResponseExceptionTranslator;
 import com.byk.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
@@ -15,6 +17,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Aut
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.ClientDetailsService;
 import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
@@ -26,6 +29,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableAuthorizationServer
+@Order(1)
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -188,6 +192,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // refresh_token默认30天
         tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
         return tokenServices;
+    }
+
+    @Bean
+    public WebResponseExceptionTranslator webResponseExceptionTranslator(){
+        return new MssWebResponseExceptionTranslator();
     }
 
 }

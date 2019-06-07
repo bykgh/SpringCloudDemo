@@ -26,27 +26,30 @@
         </encoder>
     </appender>-->
 
-
-    <logger name="org.hibernate" level="INFO" additivity="false">
+    <logger name="org.springframework.security" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
-    <logger name="org.springframework.web" level="INFO" additivity="false">
+    <logger name="org.hibernate" level="DEBUG" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <logger name="org.springframework.web" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
     <!-- 如果要打印sql，将 level 设为 debug -->
-    <logger name="org.hibernate.SQL" level="info" additivity="false">
+    <logger name="org.hibernate.SQL" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
     <!-- 如果要开启参数值跟踪，将 level 设为 trace -->
-    <logger name="org.hibernate.type" level="info" additivity="false">
+    <logger name="org.hibernate.type" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
     <!-- 日志输出级别 -->
-    <root level="INFO">
+    <root level="DEBUG">
         <appender-ref ref="STDOUT"/>
     </root>
 </configuration>

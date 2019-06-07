@@ -10,7 +10,7 @@
         </encoder>
     </appender>
 
-    <logger name="org.springframework.web" level="INFO" additivity="false">
+    <logger name="org.springframework.web" level="DEBUG" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 
