@@ -9,7 +9,7 @@ oms
 |--doc 文档、sql  
 |--config-repo 注册中心配置文件资源  
 |--refistry 注册中心  
-|--gateway 网关（spring gateway)  
+|--gateway 网关  
 |--portal 前端业务  
 |--core 核心业务  
 |--common 公共bean、util  
@@ -34,6 +34,7 @@ Security-OAuth2 密码模式
 spring data jpa 持久化  
 ribbon 负载均衡  
 hystrix 容错保护
+zuul 网关
 
 #### 数据库：  
 mysql
@@ -42,8 +43,24 @@ mysql
 
 macOS  
 intelliJ IDEA  
-java 8
+java jdk 1.8
 
 ### 部署环境
 
-red hat linux 6.0
+Red Hat Enterprise Linux  6.0  
+redis 4.0.8
+
+###  框架选择更改记录
+ 1. shiro 不适合分布式权限验证，改为 Spring Security、OAuth2 
+ 2. 参考同事意见：将网关 zuul 改为最新的 Spring gateway ，集成Spring Security、OAuth2 做权限认证  
+ 3. 发现spring gateway当前版本不支持集成 Spring Security、OAuth2 ，将网关改回zuul  
+
+###  问题处理记录
+####  1. shiro 不太适合集成在 网关中做分布式权限管理  
+    1.1 不希望在gateway中配置访问数据库
+    1.2 不希望在每个项目中都配置一套shiro  
+####  2. spring  gateway当前版本不支持集成 Spring Security、OAuth2 
+    2.1 问题原因是因为 gateway 和 pring Security、OAuth2 中的jar包有冲突
+    2.2 问题参考：https://github.com/spring-cloud/spring-cloud-gateway/issues/478
+    2.3 有人用gradle将spring  gateway集成了 Spring Security、OAuth2 
+    2.4 gradle方式参考：https://github.com/artemMartynenko/spring-cloud-gateway-oauth2-sso-sample-application.git
