@@ -22,7 +22,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http
              // 请求资源授权
                .authorizeRequests()
-                .antMatchers("/portal/login").anonymous()
+                .antMatchers("/portal/login","/account/oauth/**").anonymous()
                 .antMatchers("/portal/templates/login/login.html","/portal/templates/**","/portal/static/**").permitAll()
                 //登录地址允许匿名访问
                 .anyRequest().authenticated()
