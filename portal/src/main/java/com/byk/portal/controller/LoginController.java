@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import javax.annotation.security.PermitAll;
 
 @Controller
-@RequestMapping("/api")
 public class LoginController {
 
     private static final Logger logger = LoggerFactory.getLogger(LoginController.class);

@@ -61,30 +61,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.requestMatchers().antMatchers("/oauth/**")
-                .and()
-
-
-                .authorizeRequests()
-                //静态资源直接访问
-                .antMatchers("/","/portal/api/login**","/portal/templates/**","/portal/static/**").permitAll()
-                .antMatchers(org.springframework.http.HttpMethod.GET).permitAll()
-                //登录地址允许匿名访问
-                .antMatchers("/portal/api//login**").anonymous()
+                .and().authorizeRequests()
                 .antMatchers("/oauth/**").authenticated()
                 .anyRequest().authenticated()
-                .and()
-
-
-                .formLogin()
-                .loginPage("/portal/api/login")
-                .usernameParameter("username")
-                .passwordParameter("password")
-                .loginProcessingUrl("/authentication/form")
-                .failureForwardUrl("/portal/api/loginError")
-                .successForwardUrl("/portal/api/loginSubmit")
-                .permitAll()
-                .and()
-                .csrf().disable();
+                .and().csrf().disable();
     }
 
 
