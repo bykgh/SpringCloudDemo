@@ -4,12 +4,12 @@ $(document).ready(function(){
         var username = $("#username").text;
         var password = $("#password").text;
 
-        $.post("/try/ajax/demo_test_post.php",
+        $.post("/account/oauth/token",
         {
+            client_id:"webapp",
             grant_type:"password",
             username:username,
             password:password,
-            url:"http://localhost:8164/account/oauth/token"
         },
         function(data,status){
             alert("数据: \n" + data + "\n状态: " + status);
