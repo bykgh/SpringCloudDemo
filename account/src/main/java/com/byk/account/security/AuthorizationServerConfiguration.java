@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.core.annotation.Order;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -22,6 +23,7 @@ import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -29,7 +31,6 @@ import javax.sql.DataSource;
  */
 @Configuration
 @EnableAuthorizationServer
-@Order(1)
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
@@ -44,10 +45,15 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         return new RedisTokenStore(redisConnectionFactory);
     }
 
+    /*
     @Bean // 声明 ClientDetails实现
     public ClientDetailsService clientDetails() {
         return new JdbcClientDetailsService(dataSource);
     }
+    */
+
+    @Resource
+    private BCryptPasswordEncoder passwordEncoder;
 
     @Autowired
     private TokenStore tokenStore;
@@ -83,22 +89,16 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * @param clients
      * @throws Exception
      */
+
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // clients.withClientDetails(clientDetails());
+        //clients.withClientDetails(clientDetails());
         clients.inMemory()
-                .withClient("android")
-                .scopes("read")
-                .secret("android")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token")
-                .and()
-                .withClient("webapp")
-                .scopes("read")
-                .authorizedGrantTypes("implicit")
-                .and()
-                .withClient("browser")
-                .authorizedGrantTypes("refresh_token", "password")
-                .scopes("read");
+                .withClient("web").autoApprove(true)
+                .secret(passwordEncoder.encode("123456"))
+                .scopes("all")
+                .authorizedGrantTypes("password", "authorization_code", "refresh_token","client_credentials");
+
     }
 
 
