@@ -31,11 +31,11 @@ jar
 spring cloud   
 spring boot  
 redis  缓存  
-Spring Security、OAuth2  权限控制   
+Spring Security、OAuth2  权限控制、第三方接入   
 Security-OAuth2 密码模式  
 spring data jpa 持久化  
 ribbon 负载均衡  
-hystrix 容错保护
+hystrix 容错保护  
 zuul 网关
 
 #### 数据库：  

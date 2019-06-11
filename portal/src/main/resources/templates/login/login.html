@@ -18,13 +18,13 @@
         <link href="../portal/static/css/signin.css" rel="stylesheet">
         <script src="../portal/static/bootstrap/js/jquery.min.js"></script>
         <script src="../portal/static/bootstrap/js/bootstrap.min.js"></script>
-        <script src="../portal/static/js/login.js"></script>
+        <!--<script src="../portal/static/js/login.js"></script>-->
   </head>
 
   <body>
 
         <div class="container">
-            <form class="form-signin">
+            <form class="form-signin" action="/portal/loginSubmit" method="post">
                 <h2 class="form-signin-heading">登录</h2>
                 <label for="username" class="sr-only">用户名</label>
                 <input type="email" id="username" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
@@ -35,12 +35,8 @@
                     <input type="checkbox" value="remember-me"> Remember me
                   </label>
                 </div>
-                <button id="submitButton" class="btn btn-lg btn-primary btn-block" type="button">登录</button>
+                <button id="submitButton" class="btn btn-lg btn-primary btn-block" type="submit">登录</button>
             </form>
         </div>
-        <form id="principal" method="post" action="/account/principal">
-            <input type="hidden" id="access_token">
-        </form>
-
   </body>
 </html>

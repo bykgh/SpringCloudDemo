@@ -60,6 +60,10 @@
         </dependency>
         <!-- oauth2 end -->
         <dependency>
+            <groupId>org.apache.httpcomponents</groupId>
+            <artifactId>httpclient</artifactId>
+        </dependency>
+        <dependency>
             <groupId>com.byk</groupId>
             <artifactId>common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
