@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -93,26 +94,38 @@ public class RestClientConfig {
     }
 
     @Bean
-    public ClientHttpRequestFactory proxiedHttpRequestFactory() {
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>(1);
-        interceptors.add(requestLoggingInterceptor());
-        InterceptingClientHttpRequestFactory interceptingClientHttpRequestFactory =
-                new InterceptingClientHttpRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient(true)),
-                        interceptors);
-        return interceptingClientHttpRequestFactory;
+    public Supplier<ClientHttpRequestFactory> proxiedHttpRequestFactory() {
+
+        return  new Supplier<ClientHttpRequestFactory>() {
+            @Override
+            public ClientHttpRequestFactory get() {
+                List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>(1);
+                interceptors.add(requestLoggingInterceptor());
+                InterceptingClientHttpRequestFactory interceptingClientHttpRequestFactory =
+                        new InterceptingClientHttpRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient(true)),
+                                interceptors);
+                return interceptingClientHttpRequestFactory;
+            }
+        };
     }
 
     @Bean
-    public ClientHttpRequestFactory httpRequestFactory() {
-        List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>(1);
-        interceptors.add(requestLoggingInterceptor());
-        InterceptingClientHttpRequestFactory interceptingClientHttpRequestFactory =
-                new InterceptingClientHttpRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient(false)),
-                        interceptors);
-        return interceptingClientHttpRequestFactory;
+    public Supplier<ClientHttpRequestFactory> httpRequestFactory() {
+        return  new Supplier<ClientHttpRequestFactory>() {
+            @Override
+            public ClientHttpRequestFactory get() {
+                List<ClientHttpRequestInterceptor> interceptors = new ArrayList<>(1);
+                interceptors.add(requestLoggingInterceptor());
+                InterceptingClientHttpRequestFactory interceptingClientHttpRequestFactory =
+                        new InterceptingClientHttpRequestFactory(new HttpComponentsClientHttpRequestFactory(httpClient(false)),
+                                interceptors);
+                return interceptingClientHttpRequestFactory;
+            }
+        };
     }
 
     @Bean(name = "defaultRestTemplate")
+    @LoadBalanced
     @Primary
     public RestTemplate defaultRestTemplate(RestTemplateBuilder builder) {
         if (proxyEnable) {
@@ -124,14 +137,14 @@ public class RestClientConfig {
     @Bean(name = "proxiedRestTemplate")
     public RestTemplate proxiedRestTemplate(RestTemplateBuilder builder) {
 
-        RestTemplate restTemplate = builder.requestFactory((Supplier<ClientHttpRequestFactory>) proxiedHttpRequestFactory()).build();
+        RestTemplate restTemplate = builder.requestFactory(proxiedHttpRequestFactory()).build();
         reconfigStringConverter(restTemplate);
         return restTemplate;
     }
 
     @Bean(name = "restTemplate")
     public RestTemplate restTemplate(RestTemplateBuilder builder) {
-        RestTemplate restTemplate =  builder.requestFactory((Supplier<ClientHttpRequestFactory>) httpRequestFactory()).build();
+        RestTemplate restTemplate =  builder.requestFactory(httpRequestFactory()).build();
         reconfigStringConverter(restTemplate);
         return restTemplate;
     }

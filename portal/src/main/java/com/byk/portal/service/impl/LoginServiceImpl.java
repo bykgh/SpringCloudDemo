@@ -1,5 +1,6 @@
 package com.byk.portal.service.impl;
 
+import com.byk.common.util.JsonHelper;
 import com.byk.portal.bean.Oauth2ToKenBean;
 import com.byk.portal.service.LoginService;
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
+import java.io.IOException;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -38,8 +40,8 @@ public class LoginServiceImpl implements LoginService {
 
         HttpHeaders headers = new HttpHeaders();
         //设置请求头
-        MediaType type = MediaType.parseMediaType("application/json; charset=UTF-8");
-        headers.setContentType(type);
+        headers.setAccept(MediaType.parseMediaTypes("*/*"));
+        headers.setConnection("Keep-Alive");
         //拼接参数
         MultiValueMap<String, String> requestBody = new LinkedMultiValueMap<>();
         requestBody.add("grant_type", grantType);
@@ -47,13 +49,18 @@ public class LoginServiceImpl implements LoginService {
         requestBody.add("client_secret", clientSecret);
         requestBody.add("username", username);
         requestBody.add("password", password);
-
         HttpEntity<MultiValueMap> formEntity = new HttpEntity<MultiValueMap>(requestBody, headers);
 
-        ResponseEntity<Oauth2ToKenBean> responseEntity = defaultRestTemplate.postForEntity(tokenUrl,formEntity, Oauth2ToKenBean.class);
-        if (HttpStatus.OK.name().equals(responseEntity.getStatusCode().name())){
-            Oauth2ToKenBean oauth2ToKenBean = responseEntity.getBody();
-            return oauth2ToKenBean;
+        Oauth2ToKenBean oauth2ToKenBean = null;
+        try {
+            String responseData = defaultRestTemplate.postForObject(tokenUrl,formEntity, String.class);
+            logger.debug("signIn url :{}, responseData:{}",tokenUrl,responseData);
+            if (responseData != null){
+                oauth2ToKenBean = JsonHelper.toBean(responseData,Oauth2ToKenBean.class);
+                return oauth2ToKenBean;
+            }
+        } catch (Exception e) {
+            logger.error("get token error ",e);
         }
 
         return null;
