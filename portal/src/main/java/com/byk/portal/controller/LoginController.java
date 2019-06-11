@@ -3,6 +3,7 @@ package com.byk.portal.controller;
 import com.byk.common.util.JsonHelper;
 import com.byk.common.util.StringUtil;
 import com.byk.portal.bean.Oauth2ToKenBean;
+import com.byk.portal.remote.UserServerFeign;
 import com.byk.portal.service.LoginService;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import net.sf.json.JSONObject;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.annotation.security.PermitAll;
 import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class LoginController {
@@ -26,6 +28,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private UserServerFeign userServerFeign;
 
     /**
      * 跳转登录页面
@@ -55,16 +60,13 @@ public class LoginController {
         Oauth2ToKenBean oauth2ToKenBean = loginService.signIn(username,password);
         if(oauth2ToKenBean != null){
             //token
-            model.addAttribute("access_token",oauth2ToKenBean.getAccess_token());
-            //用户信息
-            Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-            if(principal != null){
-                try {
-                    logger.debug("登录成功页面 principal:{}", JsonHelper.toJson(principal));
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            String accessToken = oauth2ToKenBean.getAccess_token();
+            model.addAttribute("access_token",accessToken);
+            Map<String, Object> userInfoMap = userServerFeign.findUserInfo(accessToken);
+            try {
+                logger.debug("loginSubmit userInfoMap:{}",JsonHelper.toJson(userInfoMap));
+            } catch (IOException e) {
+                e.printStackTrace();
             }
 
             return "login/loginSuccess";
