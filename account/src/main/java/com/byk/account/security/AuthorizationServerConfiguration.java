@@ -82,7 +82,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * 能够使用内存或者JDBC来实现客户端详情服务（ClientDetailsService），有几个重要的属性如下列表：
      * clientId：（必须的）用来标识客户的Id。
      * secret：（需要值得信任的客户端）客户端安全码，如果有的话。
-     * scope：用来限制客户端的访问范围，如果为空（默认）的话，那么客户端拥有全部的访问范围。
+     * scope：用来限制客户端的访问范围，如果为all的话，那么客户端拥有全部的访问范围。
      * authorizedGrantTypes：此客户端可以使用的授权类型，默认为空。
      * authorities：此客户端可以使用的权限（基于Spring Security authorities）。
      *
@@ -96,7 +96,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         clients.inMemory()
                 .withClient("web").autoApprove(true)
                 .secret(passwordEncoder.encode("123456"))
-                //.scopes("all")
+                 .scopes("all")
                 .authorizedGrantTypes("password");
 
     }
