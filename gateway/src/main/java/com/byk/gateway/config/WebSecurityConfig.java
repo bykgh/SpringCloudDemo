@@ -21,19 +21,20 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
              // 请求资源授权
-               .authorizeRequests()
-                .antMatchers("/portal/login","/portal/loginSubmit","/account/oauth/**").anonymous()
-                .antMatchers("/portal/templates/login/login.html","/portal/templates/**","/portal/static/**").permitAll()
-                //登录地址允许匿名访问
-                .anyRequest().authenticated()
-                .and()
+               //.authorizeRequests()
+               // .antMatchers("/portal/login","/portal/loginSubmit","/account/oauth/**").anonymous()
+                //.antMatchers("/portal/templates/login/login.html","/portal/templates/**","/portal/static/**").permitAll()
+                //.anyRequest().authenticated()
+               //.and()
+                /**
             .formLogin()
                 .loginPage("/portal/login")
                 .failureForwardUrl("/portal/loginError")
                 .successForwardUrl("/portal/loginSubmit")
                 .permitAll()
                 .and()
-            .csrf().disable();
+                 **/
+                .csrf().disable();
     }
 
     /**

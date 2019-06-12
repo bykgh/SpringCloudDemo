@@ -96,8 +96,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         clients.inMemory()
                 .withClient("web").autoApprove(true)
                 .secret(passwordEncoder.encode("123456"))
-                .scopes("all")
-                .authorizedGrantTypes("password", "authorization_code", "refresh_token","client_credentials");
+                //.scopes("all")
+                .authorizedGrantTypes("password");
 
     }
 
