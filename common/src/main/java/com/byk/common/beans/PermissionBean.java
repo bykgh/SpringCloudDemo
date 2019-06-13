@@ -1,16 +1,7 @@
-package com.byk.account.entity;
+package com.byk.common.beans;
 
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EntityListeners;
-import javax.persistence.Table;
-
-@Entity
-@Table(name="sys_permission")
-@EntityListeners(AuditingEntityListener.class)
-public class Permission extends AutoIDEntity{
+public class PermissionBean {
 
     /**
      * 资源名称
@@ -71,7 +62,6 @@ public class Permission extends AutoIDEntity{
     private String available;
 
 
-    @Column(name="name")
     public String getName() {
         return name;
     }
@@ -80,7 +70,6 @@ public class Permission extends AutoIDEntity{
         this.name = name;
     }
 
-    @Column(name="type")
     public String getType() {
         return type;
     }
@@ -89,7 +78,6 @@ public class Permission extends AutoIDEntity{
         this.type = type;
     }
 
-    @Column(name="method")
     public String getMethod() {
         return method;
     }
@@ -98,7 +86,6 @@ public class Permission extends AutoIDEntity{
         this.method = method;
     }
 
-    @Column(name="service_prefix")
     public String getServicePrefix() {
         return servicePrefix;
     }
@@ -107,7 +94,6 @@ public class Permission extends AutoIDEntity{
         this.servicePrefix = servicePrefix;
     }
 
-    @Column(name="zuul_prefix")
     public String getZuulPrefix() {
         return zuulPrefix;
     }
@@ -116,7 +102,6 @@ public class Permission extends AutoIDEntity{
         this.zuulPrefix = zuulPrefix;
     }
 
-    @Column(name="url")
     public String getUrl() {
         return url;
     }
@@ -125,7 +110,6 @@ public class Permission extends AutoIDEntity{
         this.url = url;
     }
 
-    @Column(name="permission_code")
     public String getPercode() {
         return percode;
     }
@@ -134,7 +118,6 @@ public class Permission extends AutoIDEntity{
         this.percode = percode;
     }
 
-    @Column(name="parent_id")
     public Integer getParentid() {
         return parentid;
     }
@@ -143,7 +126,6 @@ public class Permission extends AutoIDEntity{
         this.parentid = parentid;
     }
 
-    @Column(name="parent_ids")
     public String getParentids() {
         return parentids;
     }
@@ -152,7 +134,6 @@ public class Permission extends AutoIDEntity{
         this.parentids = parentids;
     }
 
-    @Column(name="sortstring")
     public String getSortstring() {
         return sortstring;
     }
@@ -161,7 +142,6 @@ public class Permission extends AutoIDEntity{
         this.sortstring = sortstring;
     }
 
-    @Column(name="available")
     public String getAvailable() {
         return available;
     }

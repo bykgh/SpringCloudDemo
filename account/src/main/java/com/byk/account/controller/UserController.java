@@ -1,12 +1,17 @@
 package com.byk.account.controller;
 
+import com.byk.account.entity.User;
+import com.byk.account.service.UserService;
 import com.byk.common.beans.Result;
+import com.byk.common.beans.UserBean;
 import com.byk.common.enums.ResultCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
@@ -15,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @RestController
@@ -30,6 +36,8 @@ public class UserController {
 
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
+
+    private UserService userService;
 
     @GetMapping("/userinfo")
     public Principal principal(Principal principal) {
@@ -49,25 +57,19 @@ public class UserController {
         return result;
     }
 
-     @RequestMapping("/findUserInfo")
-     public Map<String, Object> findUserInfo(String authorization) {
-         Map<String, Object> map = new HashMap<>();
-         OAuth2Authentication authen=null;
-         try {
-              authen=new RedisTokenStore(redisConnectionFactory).readAuthentication(authorization);
-              if(authen==null){
-                  map.put("error", "invalid token !");
-                  return map;
-              }
-         } catch(Exception e) {
-              System.out.println(e);
-              map.put("error", e);
-              return map;
-         }
-         //注意这两个key都不能随便填，都是和客户端进行数据处理时进行对应的。
-         map.put("user", authen.getPrincipal());
-         map.put("authorities", authen.getAuthorities());
-         return map;
+    /**
+     * 查询用户的权限角色信息
+     * @param access_token
+     * @return
+     */
+     @RequestMapping("/findUserBean")
+     public UserBean findUserBean(String access_token) {
+         Map<String,String> principalMap  = (LinkedHashMap<String,String>)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+         String userCode = principalMap.get("username");
+         User user =  userService.findByUserCode(userCode);
+         UserBean userBean = new UserBean();
+         BeanUtils.copyProperties(user,userBean);
+         return userBean;
      }
 
 }

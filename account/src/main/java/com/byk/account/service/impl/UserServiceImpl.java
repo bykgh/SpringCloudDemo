@@ -23,8 +23,13 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
+    public User findByUserCode(String userCode) {
+        return userDao.findByUserCode(userCode);
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
-        User user = userDao.findByUserName(userName);
+        User user = userDao.findByUserCode(userName);
         if (user == null) {
             throw new UsernameNotFoundException(userName);
         }

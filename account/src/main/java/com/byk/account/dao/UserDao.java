@@ -4,6 +4,6 @@ import com.byk.account.entity.User;
 
 public interface UserDao extends BaseDao<User,Long>{
 
-    User findByUserName(String userName);
+    User findByUserCode(String userCode);
 
 }

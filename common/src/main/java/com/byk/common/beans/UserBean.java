@@ -15,19 +15,9 @@ public class UserBean {
     private String userName;
 
     /**
-     * 密码
-     */
-    private String password;
-
-    /**
      * 所属源
      */
     private String source;
-
-    /**
-     * 盐
-     */
-    private String slat;
 
     /**
      * 是否锁定
@@ -39,10 +29,8 @@ public class UserBean {
      */
     private Date createTime;
 
-    /**
-     * 更新时间
-     */
-    private Date updateTime;
+
+    private RoleBean roleBean;
 
 
     public String getUserCode() {
@@ -61,28 +49,12 @@ public class UserBean {
         this.userName = userName;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public String getSource() {
         return source;
     }
 
     public void setSource(String source) {
         this.source = source;
-    }
-
-    public String getSlat() {
-        return slat;
-    }
-
-    public void setSlat(String slat) {
-        this.slat = slat;
     }
 
     public String getLocked() {
@@ -101,11 +73,11 @@ public class UserBean {
         this.createTime = createTime;
     }
 
-    public Date getUpdateTime() {
-        return updateTime;
+    public RoleBean getRoleBean() {
+        return roleBean;
     }
 
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+    public void setRoleBean(RoleBean roleBean) {
+        this.roleBean = roleBean;
     }
 }
