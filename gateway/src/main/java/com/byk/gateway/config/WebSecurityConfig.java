@@ -19,22 +19,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-             // 请求资源授权
-               //.authorizeRequests()
-               // .antMatchers("/portal/login","/portal/loginSubmit","/account/oauth/**").anonymous()
-                //.antMatchers("/portal/templates/login/login.html","/portal/templates/**","/portal/static/**").permitAll()
-                //.anyRequest().authenticated()
-               //.and()
-                /**
-            .formLogin()
-                .loginPage("/portal/login")
-                .failureForwardUrl("/portal/loginError")
-                .successForwardUrl("/portal/loginSubmit")
-                .permitAll()
-                .and()
-                 **/
-                .csrf().disable();
+        http.csrf().disable();
     }
 
     /**
