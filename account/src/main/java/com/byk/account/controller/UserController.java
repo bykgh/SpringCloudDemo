@@ -14,18 +14,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.ConsumerTokenServices;
-import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -33,22 +30,27 @@ public class UserController {
 
     private static final Logger logger = LoggerFactory.getLogger(UserController.class);
 
-
-
-    @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
-
     @Autowired
     private ConsumerTokenServices consumerTokenServices;
 
     @Autowired
     private UserService userService;
 
+    /**
+     * 权限查询
+     * @param principal
+     * @return
+     */
     @RequestMapping("/userinfo")
     public Principal principal(Principal principal) {
         return principal;
     }
 
+    /**
+     * 退出登录
+     * @param access_token
+     * @return
+     */
     @DeleteMapping(value = "/exit")
     public Result revokeToken(String access_token) {
         Result result = new Result();

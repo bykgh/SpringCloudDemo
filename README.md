@@ -26,6 +26,7 @@ jar
  jquery  
  bootstarp 3.3  
  thymeleaf
+ html5shiv -- IE 识别并支持 HTML5 元素
  
 #### 后端：  
 spring cloud   

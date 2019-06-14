@@ -1,7 +1,5 @@
 package com.byk.common.beans;
 
-import java.util.List;
-
 public class RoleBean {
 
  /**

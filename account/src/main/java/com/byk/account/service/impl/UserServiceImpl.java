@@ -1,6 +1,5 @@
 package com.byk.account.service.impl;
 
-import com.byk.account.bean.CustomUserDetails;
 import com.byk.account.dao.UserDao;
 import com.byk.account.entity.Permission;
 import com.byk.account.entity.Role;
