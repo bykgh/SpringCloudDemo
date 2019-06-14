@@ -18,7 +18,7 @@ public class Permission extends AutoIDEntity{
     private String name;
 
     /**
-     *资源类型：menu,button
+     *资源类型：MENU,BUTTON
      */
     private String type;
 

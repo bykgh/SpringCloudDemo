@@ -34,7 +34,14 @@ public class StringUtil {
         return str;
     }
 
-    //字符填充
+    /**
+     * 字符填充
+     * @param sourceStr
+     * @param chr
+     * @param direction
+     * @param length
+     * @return
+     */
     public static String fillChar(String sourceStr, String chr, String direction, int length) {
         int strLen = sourceStr.length();
         if (strLen < length) {
@@ -42,9 +49,11 @@ public class StringUtil {
                 StringBuffer sb = new StringBuffer();
 
                 if ("L".equals(direction)) {
-                    sb.append(chr).append(sourceStr);    //左补
+                    //左补
+                    sb.append(chr).append(sourceStr);
                 } else if ("R".equals(direction)) {
-                    sb.append(sourceStr).append(chr);    //右补
+                    //右补
+                    sb.append(sourceStr).append(chr);
                 }
                 sourceStr = sb.toString();
                 strLen = sourceStr.length();
@@ -54,7 +63,9 @@ public class StringUtil {
         return sourceStr;
     }
 
-    //替换字符串中的"_",并使它的下一个字母转为大写
+    /**
+     * 替换字符串中的"_",并使它的下一个字母转为大写
+     */
     public static String replaceUnderline(String srcStr) {
 
         srcStr = srcStr.toLowerCase();
@@ -74,7 +85,9 @@ public class StringUtil {
         return newString;
     }
 
-    //首字母大写
+    /**
+     * 首字母大写
+     */
     public static String firstCharacterToUpper(String srcStr) {
         return srcStr.substring(0, 1).toUpperCase() + srcStr.substring(1);
     }

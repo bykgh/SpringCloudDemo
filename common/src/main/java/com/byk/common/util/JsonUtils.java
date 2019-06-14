@@ -6,7 +6,7 @@ import org.apache.commons.beanutils.BeanUtils;
 
 import java.util.*;
 
-public class JSONUtils {
+public class JsonUtils {
     /**
      *
      * @author wangwei JSON工具类
@@ -121,7 +121,7 @@ public class JSONUtils {
      */
     public static HashMap toHashMap(Object object) {
         HashMap<String, Object> data = new HashMap<String, Object>();
-        JSONObject jsonObject = JSONUtils.toJSONObject(object);
+        JSONObject jsonObject = JsonUtils.toJSONObject(object);
         Iterator it = jsonObject.keys();
         while (it.hasNext()) {
             String key = String.valueOf(it.next());
@@ -134,11 +134,10 @@ public class JSONUtils {
 
     /***
      * 将对象转换为List<Map<String,Object>>
-     *
+     * 返回非实体类型(Map<String,Object>)的List
      * @param object
      * @return
      */
-    // 返回非实体类型(Map<String,Object>)的List
     public static List<Map<String, Object>> toList(Object object) {
         List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
         JSONArray jsonArray = JSONArray.fromObject(object);
@@ -230,8 +229,8 @@ public class JSONUtils {
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
         JSONArray jsonArray = (JSONArray) jsonObject.get(detailName);
 
-        T mainEntity = JSONUtils.toBean(jsonObject, mainClass);
-        List<D> detailList = JSONUtils.toList(jsonArray, detailClass);
+        T mainEntity = JsonUtils.toBean(jsonObject, mainClass);
+        List<D> detailList = JsonUtils.toList(jsonArray, detailClass);
 
         try {
             BeanUtils.setProperty(mainEntity, detailName, detailList);
@@ -269,9 +268,9 @@ public class JSONUtils {
         JSONArray jsonArray1 = (JSONArray) jsonObject.get(detailName1);
         JSONArray jsonArray2 = (JSONArray) jsonObject.get(detailName2);
 
-        T mainEntity = JSONUtils.toBean(jsonObject, mainClass);
-        List<D1> detailList1 = JSONUtils.toList(jsonArray1, detailClass1);
-        List<D2> detailList2 = JSONUtils.toList(jsonArray2, detailClass2);
+        T mainEntity = JsonUtils.toBean(jsonObject, mainClass);
+        List<D1> detailList1 = JsonUtils.toList(jsonArray1, detailClass1);
+        List<D2> detailList2 = JsonUtils.toList(jsonArray2, detailClass2);
 
         try {
             BeanUtils.setProperty(mainEntity, detailName1, detailList1);
@@ -316,10 +315,10 @@ public class JSONUtils {
         JSONArray jsonArray2 = (JSONArray) jsonObject.get(detailName2);
         JSONArray jsonArray3 = (JSONArray) jsonObject.get(detailName3);
 
-        T mainEntity = JSONUtils.toBean(jsonObject, mainClass);
-        List<D1> detailList1 = JSONUtils.toList(jsonArray1, detailClass1);
-        List<D2> detailList2 = JSONUtils.toList(jsonArray2, detailClass2);
-        List<D3> detailList3 = JSONUtils.toList(jsonArray3, detailClass3);
+        T mainEntity = JsonUtils.toBean(jsonObject, mainClass);
+        List<D1> detailList1 = JsonUtils.toList(jsonArray1, detailClass1);
+        List<D2> detailList2 = JsonUtils.toList(jsonArray2, detailClass2);
+        List<D3> detailList3 = JsonUtils.toList(jsonArray3, detailClass3);
 
         try {
             BeanUtils.setProperty(mainEntity, detailName1, detailList1);
@@ -348,7 +347,7 @@ public class JSONUtils {
     public static <T> T toBean(String jsonString, Class<T> mainClass,
                                HashMap<String, Class> detailClass) {
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
-        T mainEntity = JSONUtils.toBean(jsonObject, mainClass);
+        T mainEntity = JsonUtils.toBean(jsonObject, mainClass);
         for (Object key : detailClass.keySet()) {
             try {
                 Class value = (Class) detailClass.get(key);

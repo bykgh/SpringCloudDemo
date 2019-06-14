@@ -16,11 +16,12 @@ public class RequestLoggingInterceptor implements ClientHttpRequestInterceptor {
 
     @Override
     public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
+        BufferingClientHttpResponseWrapper responseWrapper = null;
         ClientHttpResponse response = null;
         try {
             response = execution.execute(request, body);
         } finally {
-            BufferingClientHttpResponseWrapper responseWrapper = new BufferingClientHttpResponseWrapper(response);
+            responseWrapper = new BufferingClientHttpResponseWrapper(response);
             LOGGER.info("request method: {}, request URI: {}, request headers: {}, request body: {}, response status code: {}, response headers: {}, response body: {}",
                     request.getMethod(),
                     request.getURI(),
@@ -29,7 +30,8 @@ public class RequestLoggingInterceptor implements ClientHttpRequestInterceptor {
                     response.getStatusCode(),
                     response.getHeaders(),
                     new String(StreamUtils.copyToByteArray(responseWrapper.getBody()), Charset.forName("UTF-8")));
-            return responseWrapper;
+
         }
+        return responseWrapper;
     }
 }

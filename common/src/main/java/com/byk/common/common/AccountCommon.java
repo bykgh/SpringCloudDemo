@@ -10,12 +10,12 @@ public class AccountCommon {
         /**
          * 可用
          */
-        public static final String available = "1";
+        public static final String AVAILABLE = "1";
 
         /**
          * 不可用
          */
-        public static final String unavailable = "2";
+        public static final String UNAVAILABLE = "2";
     }
 
 
@@ -27,11 +27,11 @@ public class AccountCommon {
         /**
          * 菜单
          */
-        public static final String menu = "menu";
+        public static final String MENU = "MENU";
 
         /**
          * 按钮
          */
-        public static final String button = "button";
+        public static final String BUTTON = "BUTTON";
     }
 }

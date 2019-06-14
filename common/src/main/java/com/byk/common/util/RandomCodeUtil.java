@@ -1,5 +1,7 @@
 package com.byk.common.util;
 
+import java.util.Random;
+
 public class RandomCodeUtil {
     /**
      * 产生一个随机的N位的字符串
@@ -11,7 +13,7 @@ public class RandomCodeUtil {
         String chars = "0123456789qwertyuiopasdfghjklzxcvbnmQWERTYUIOPASDFGHJKLZXCVBNM";
         char[] rands = new char[fix];
         for (int i = 0; i < fix; i++) {
-            int rand = (int) (Math.random() * 62);
+            int rand = new Random().nextInt(62);
             rands[i] = chars.charAt(rand);
         }
         return new String(rands);

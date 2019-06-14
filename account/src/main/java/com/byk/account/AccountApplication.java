@@ -8,6 +8,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 
+
+/**
+ * @author yikai.bi
+ */
 @SpringBootApplication
 @EnableEurekaClient
 @EnableJpaAuditing

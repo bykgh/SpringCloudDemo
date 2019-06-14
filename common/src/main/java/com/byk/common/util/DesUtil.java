@@ -9,8 +9,8 @@ import javax.crypto.spec.IvParameterSpec;
 
 public class DesUtil {
 
-    private static final byte[] initKey = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
-    private static final String AlgorithmAll = "DES/CBC/NoPadding"; // "DES/CBC/PKCS5Padding";
+    private static final byte[] INIT_KEY = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
+    private static final String ALGORITHM_ALL = "DES/CBC/NoPadding";
     private static final String AlgorithmAll_DESede = "DESede/ECB/NoPadding";
 
     /**
@@ -26,8 +26,9 @@ public class DesUtil {
         }
         byte[] b = null;
         if (key.length() == 16) {
-            b = desEncrypt(initKey, EncodeUtil.hexStringToByte(src), EncodeUtil.hexStringToByte(key));
-        } else if (key.length() == 32) {  //双倍长3DES加密
+            b = desEncrypt(INIT_KEY, EncodeUtil.hexStringToByte(src), EncodeUtil.hexStringToByte(key));
+        } else if (key.length() == 32) {
+            //双倍长3DES加密
             String keyTmp = key.substring(0, 16);
             b = des3Encrypt(EncodeUtil.hexStringToByte(src), EncodeUtil.hexStringToByte(key + keyTmp));
         } else {
@@ -102,12 +103,12 @@ public class DesUtil {
             if (ivstr != null) {
                 iv = new IvParameterSpec(ivstr);
             } else {
-                iv = new IvParameterSpec(initKey);
+                iv = new IvParameterSpec(INIT_KEY);
             }
             DESKeySpec dks = new DESKeySpec(key);
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
             SecretKey securekey = keyFactory.generateSecret(dks);
-            Cipher cipher = Cipher.getInstance(AlgorithmAll, "SunJCE");
+            Cipher cipher = Cipher.getInstance(ALGORITHM_ALL, "SunJCE");
             cipher.init(Cipher.ENCRYPT_MODE, securekey, iv);
             return cipher.doFinal(src);
         } catch (java.security.NoSuchAlgorithmException e1) {
@@ -136,12 +137,12 @@ public class DesUtil {
             if (ivstr != null) {
                 iv = new IvParameterSpec(ivstr);
             } else {
-                iv = new IvParameterSpec(initKey);
+                iv = new IvParameterSpec(INIT_KEY);
             }
             DESKeySpec dks = new DESKeySpec(key);
             SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("DES");
             SecretKey securekey = keyFactory.generateSecret(dks);
-            Cipher cipher = Cipher.getInstance(AlgorithmAll, "SunJCE");
+            Cipher cipher = Cipher.getInstance(ALGORITHM_ALL, "SunJCE");
             cipher.init(Cipher.DECRYPT_MODE, securekey, iv);
             return cipher.doFinal(src);
         } catch (java.security.NoSuchAlgorithmException e1) {
@@ -163,7 +164,7 @@ public class DesUtil {
      * @return
      */
     public static String desDecrypt(String src, String key) {
-        byte[] b = desDecrypt(initKey, EncodeUtil.hexStringToByte(src), EncodeUtil.hexStringToByte(key));
+        byte[] b = desDecrypt(INIT_KEY, EncodeUtil.hexStringToByte(src), EncodeUtil.hexStringToByte(key));
         return EncodeUtil.bytesToHexString(b);
     }
 

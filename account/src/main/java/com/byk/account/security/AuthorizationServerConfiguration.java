@@ -39,7 +39,11 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     @Autowired
     private RedisConnectionFactory redisConnectionFactory;
 
-    @Bean // 声明TokenStore实现
+    /**
+     * 声明TokenStore实现
+     * @return
+     */
+    @Bean
     public TokenStore tokenStore() {
         //return new JdbcTokenStore(dataSource);
         return new RedisTokenStore(redisConnectionFactory);

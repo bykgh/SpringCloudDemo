@@ -18,7 +18,7 @@ import java.util.TimeZone;
 
 import java.util.*;
 
-public abstract class JsonHelper {
+public abstract class AbstractJsonHelper {
 
     public static JsonNode toTree(String json) throws IOException {
         return MAPPER.readTree(json);

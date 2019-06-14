@@ -47,7 +47,7 @@ public class Day
         calendar_.setLenient(true);
         calendar_.setFirstDayOfWeek(Calendar.MONDAY);
 //    calendar_.setTimeZone (TimeZone.getTimeZone ("GMT"));
-        calendar_.setTimeZone(TimeZone.getTimeZone("GMT+8"));  // �й�ʱ��
+        calendar_.setTimeZone(TimeZone.getTimeZone("GMT+8"));
         set(year, month, dayOfMonth);
     }
 
@@ -339,6 +339,7 @@ public class Day
                 return 11;
             case Calendar.DECEMBER:
                 return 12;
+                default:
         }
 
         // This will never happen
@@ -565,6 +566,7 @@ public class Day
                 return "Saturday";
             case Calendar.SUNDAY:
                 return "Sunday";
+                default:
         }
 
         // This will never happen

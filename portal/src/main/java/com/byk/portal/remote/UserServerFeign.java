@@ -9,6 +9,10 @@ import java.util.Map;
 @FeignClient("account-server")
 public interface UserServerFeign {
 
+    /**
+     * 查询用户信息
+     * @return
+     */
     @RequestMapping("/api/findUser")
     public UserBean findUser();
 

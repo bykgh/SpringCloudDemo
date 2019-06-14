@@ -1,6 +1,6 @@
 package com.byk.portal.service.impl;
 
-import com.byk.common.util.JsonHelper;
+import com.byk.common.util.AbstractJsonHelper;
 import com.byk.portal.bean.Oauth2ToKenBean;
 import com.byk.portal.service.LoginService;
 import org.slf4j.Logger;
@@ -13,7 +13,6 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
-import java.io.IOException;
 
 @Service
 public class LoginServiceImpl implements LoginService {
@@ -56,7 +55,7 @@ public class LoginServiceImpl implements LoginService {
             String responseData = defaultRestTemplate.postForObject(tokenUrl,formEntity, String.class);
             logger.debug("signIn url :{}, responseData:{}",tokenUrl,responseData);
             if (responseData != null){
-                oauth2ToKenBean = JsonHelper.toBean(responseData,Oauth2ToKenBean.class);
+                oauth2ToKenBean = AbstractJsonHelper.toBean(responseData,Oauth2ToKenBean.class);
                 return oauth2ToKenBean;
             }
         } catch (Exception e) {

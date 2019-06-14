@@ -25,7 +25,9 @@ public class AmountUtil implements Serializable {
      * 确的浮点数运算，包括加减乘除和四舍五入。
      */
 
-    //默认除法运算精度
+    /**
+     * 默认除法运算精度
+     */
     private static final int DEF_DIV_SCALE = 2;
 
     //这个类不能实例化

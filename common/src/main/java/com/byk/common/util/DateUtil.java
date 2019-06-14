@@ -43,7 +43,7 @@ public class DateUtil {
      * @param
      * @return boolean
      */
-    public static boolean CompareDays(Date beginTime, Date endTime, int days) {
+    public static boolean compareDays(Date beginTime, Date endTime, int days) {
         Calendar begin = Calendar.getInstance();
         begin.setTime(beginTime);
         begin.set(Calendar.HOUR_OF_DAY, 0);
@@ -211,7 +211,7 @@ public class DateUtil {
         return sf.parse(sDate);
     }
 
-    public static Date parseToDateWithyyyy_MM_dd(String sDate)
+    public static Date parseToDateWithyyyyMMdd(String sDate)
             throws ParseException {
         return parseToDate(sDate, "yyyy-MM-dd");
     }
