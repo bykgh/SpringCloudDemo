@@ -155,6 +155,7 @@ public class Day
      *
      * @return This day cloned.
      */
+    @Override
     public Object clone() {
         return new Day(this);
     }
@@ -203,6 +204,7 @@ public class Day
      * @return @see Comparable#compareTo(Object)
      * @throws ClassCastException If object is not of type Day.
      */
+    @Override
     public int compareTo(Object object) {
         Day day = (Day) object;
         return calendar_.getTime().compareTo(day.calendar_.getTime());
@@ -248,6 +250,7 @@ public class Day
      *
      * @return A hash code value for this object.
      */
+    @Override
     public int hashCode() {
         return calendar_.hashCode();
     }
@@ -606,13 +609,16 @@ public class Day
     public static Day getNthOfMonth(int n, int dayOfWeek, int month, int year)
             throws ArrayIndexOutOfBoundsException {
         // Validate the dayOfWeek argument
-        if (dayOfWeek < 0 || dayOfWeek > 6)
+        if (dayOfWeek < 0 || dayOfWeek > 6) {
             throw new ArrayIndexOutOfBoundsException(dayOfWeek);
+        }
 
         Day first = new Day(year, month, 1);
 
         int offset = dayOfWeek - first.getDayOfWeek();
-        if (offset < 0) offset = 7 + offset;
+        if (offset < 0) {
+            offset = 7 + offset;
+        }
 
         int dayNo = (n - 1) * 7 + offset + 1;
 
@@ -658,13 +664,18 @@ public class Day
      *
      * @return A string representation of this day.
      */
+    @Override
     public String toString() {
         StringBuffer string = new StringBuffer();
 
-        if (getDayOfMonth() < 10) string.append('0');
+        if (getDayOfMonth() < 10) {
+            string.append('0');
+        }
         string.append(getDayOfMonth());
         string.append('/');
-        if (getMonth() < 9) string.append('0');
+        if (getMonth() < 9) {
+            string.append('0');
+        }
         string.append(getMonth() + 1);
         string.append('-');
         string.append(getYear());

@@ -79,15 +79,17 @@ public class Md5Util {
     }
 
     public static String getMd5Str(String source) {
-        byte b[] = getMd5Bytes(source);
+        byte[] b = getMd5Bytes(source);
         int i;
         StringBuffer buf = new StringBuffer("");
         for (int offset = 0; offset < b.length; offset++) {
             i = b[offset];
-            if (i < 0)
+            if (i < 0) {
                 i += 256;
-            if (i < 16)
+            }
+            if (i < 16) {
                 buf.append("0");
+            }
             buf.append(Integer.toHexString(i));
         }
         //logger.info("getMd5Str source: {}" , source);
@@ -98,7 +100,7 @@ public class Md5Util {
         try {
             MessageDigest md = MessageDigest.getInstance("MD5");
             md.update(source.getBytes("UTF-8"));
-            byte b[] = md.digest();
+            byte[] b = md.digest();
             return b;
         } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();

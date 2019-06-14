@@ -41,8 +41,9 @@ public class BaseEntity implements java.io.Serializable{
 
     @Override
     public boolean equals(final Object other) {
-        if (!(other instanceof BaseEntity))
+        if (!(other instanceof BaseEntity)) {
             return false;
+        }
         BaseEntity castOther = (BaseEntity) other;
         return new EqualsBuilder().append(id, castOther.getId()).isEquals();
     }

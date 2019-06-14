@@ -258,19 +258,21 @@ public class DateUtil {
     public static int getSecondsBetweenDate(Date before, Date after) {
         Long sec = after.getTime() - before.getTime();
         Long t = sec / 1000;
-        if (t > 0)
+        if (t > 0) {
             return t.intValue();
-        else
+        } else {
             return 0;
+        }
     }
 
     public static int getMinutesBetweenDate(Date before, Date after) {
         Long sec = after.getTime() - before.getTime();
         Long t = sec / (1000 * 60);
-        if (t > 0)
+        if (t > 0) {
             return t.intValue();
-        else
+        } else {
             return 0;
+        }
     }
 
 }

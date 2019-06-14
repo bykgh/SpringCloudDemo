@@ -39,8 +39,9 @@ public class AutoIDEntity implements java.io.Serializable {
 
     @Override
     public boolean equals(final Object other) {
-        if (!(other instanceof AutoIDEntity))
+        if (!(other instanceof AutoIDEntity)) {
             return false;
+        }
         AutoIDEntity castOther = (AutoIDEntity) other;
         return new EqualsBuilder().append(id, castOther.getId()).isEquals();
     }

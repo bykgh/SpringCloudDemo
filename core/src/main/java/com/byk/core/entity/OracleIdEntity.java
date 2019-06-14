@@ -35,8 +35,9 @@ public class OracleIdEntity implements java.io.Serializable{
 
     @Override
     public boolean equals(final Object other) {
-        if (!(other instanceof OracleIdEntity))
+        if (!(other instanceof OracleIdEntity)) {
             return false;
+        }
         OracleIdEntity castOther = (OracleIdEntity) other;
         return new EqualsBuilder().append(id, castOther.getId()).isEquals();
     }

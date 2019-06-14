@@ -28,8 +28,9 @@ public class StringUtil {
     }
 
     public static String safeValue(String str) {
-        if (str == null)
+        if (str == null) {
             return "";
+        }
         return str;
     }
 
@@ -98,7 +99,7 @@ public class StringUtil {
         try {
             JSONObject tempJSONObject = new JSONObject();
             if (object instanceof List) {
-                JSONString = new JSONArray().fromObject(object, jsonConfig).toString();
+                JSONString = JSONArray.fromObject(object, jsonConfig).toString();
             } else {
                 JSONString = JSONObject.fromObject(object).toString();
             }

@@ -188,8 +188,11 @@ public class AmountUtil implements Serializable {
      * @return
      */
     public static boolean compare(double a, double b) {
-        if (a - b > -0.001) return true;
-        else return false;
+        if (a - b > -0.001) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**
@@ -200,8 +203,11 @@ public class AmountUtil implements Serializable {
      * @return
      */
     public static boolean bigger(double a, double b) {
-        if (a - b > 0.001) return true;
-        else return false;
+        if (a - b > 0.001) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     /**

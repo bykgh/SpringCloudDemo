@@ -33,7 +33,9 @@ public abstract class JsonHelper {
     }
 
     public static <T> T toBean(String json, Class<T> clazz) throws IOException {
-        if (json == null || "".equals(json)) return null;
+        if (json == null || "".equals(json)) {
+            return null;
+        }
         JsonParser parser = JSON_FACTORY.createParser(json);
         parser.setCodec(MAPPER);
         T t = parser.readValueAs(clazz);
@@ -42,7 +44,9 @@ public abstract class JsonHelper {
     }
 
     public static <T> T parseJson(String json, TypeReference<T> typeOfT) throws IOException {
-        if (json == null || "".equals(json)) return null;
+        if (json == null || "".equals(json)) {
+            return null;
+        }
         JsonParser parser = JSON_FACTORY.createParser(json);
         parser.setCodec(MAPPER);
         T t = parser.readValueAs(typeOfT);
@@ -53,7 +57,9 @@ public abstract class JsonHelper {
     public static <T> T parseJsonStr(String json, TypeReference<T> typeOfT) {
         T t = null;
         try {
-            if (json == null || "".equals(json)) return null;
+            if (json == null || "".equals(json)) {
+                return null;
+            }
             JsonParser parser = JSON_FACTORY.createParser(json);
             parser.setCodec(MAPPER);
             t = parser.readValueAs(typeOfT);
