@@ -18,6 +18,11 @@ public class Role extends AutoIDEntity{
     private String available;
 
     /**
+     * 角色描述（页面展示）
+     */
+    private String describe;
+
+    /**
      * 资源列表
      */
     private List<Permission> permission;
@@ -50,5 +55,14 @@ public class Role extends AutoIDEntity{
 
     public void setPermission(List<Permission> permission) {
         this.permission = permission;
+    }
+
+    @Column(name="describe")
+    public String getDescribe() {
+        return describe;
+    }
+
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }

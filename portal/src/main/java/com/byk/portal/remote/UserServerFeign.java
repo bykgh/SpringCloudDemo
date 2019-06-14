@@ -9,7 +9,7 @@ import java.util.Map;
 @FeignClient("account-server")
 public interface UserServerFeign {
 
-    @RequestMapping("/api/findUserBean")
-    public UserBean findUserBean();
+    @RequestMapping("/api/findUser")
+    public UserBean findUser();
 
 }

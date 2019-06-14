@@ -61,6 +61,11 @@ public class PermissionBean {
      */
     private String available;
 
+    /**
+     * 是否展示  TRUE 展示  FALSE 不展示
+     */
+    private Boolean show;
+
 
     public String getName() {
         return name;
@@ -148,5 +153,33 @@ public class PermissionBean {
 
     public void setAvailable(String available) {
         this.available = available;
+    }
+
+    public Boolean getShow() {
+        return show;
+    }
+
+    public void setShow(Boolean show) {
+        this.show = show;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof PermissionBean){
+            PermissionBean permissionBean = (PermissionBean)obj;
+            return  this.name.equals(permissionBean.name)
+                    && this.available.equals(permissionBean.available)
+                    && this .method.equals(permissionBean.method)
+                    && this.parentid.equals(permissionBean.parentid)
+                    && this.parentids.equals(permissionBean.parentids)
+                    && this.percode.equals(permissionBean.percode)
+                    && this.servicePrefix.equals(permissionBean.servicePrefix)
+                    && this.sortstring.equals(permissionBean.sortstring)
+                    && this.zuulPrefix.equals(permissionBean.zuulPrefix)
+                    && this.type.equals(permissionBean.type)
+                    && this.url.equals(permissionBean.url)
+                    && this.show.equals(permissionBean.show);
+        }
+        return super.equals(obj);
     }
 }

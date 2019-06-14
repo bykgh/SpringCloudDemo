@@ -70,6 +70,10 @@ public class Permission extends AutoIDEntity{
      */
     private String available;
 
+    /**
+     * 是否展示  TRUE 展示  FALSE 不展示
+     */
+    private Boolean show;
 
     @Column(name="name")
     public String getName() {
@@ -168,5 +172,14 @@ public class Permission extends AutoIDEntity{
 
     public void setAvailable(String available) {
         this.available = available;
+    }
+
+    @Column(name="show")
+    public Boolean getShow() {
+        return show;
+    }
+
+    public void setShow(Boolean show) {
+        this.show = show;
     }
 }

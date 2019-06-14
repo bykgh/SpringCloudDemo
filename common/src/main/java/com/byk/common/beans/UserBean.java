@@ -1,13 +1,9 @@
 package com.byk.common.beans;
 
 import java.util.Date;
+import java.util.List;
 
 public class UserBean {
-
-    /**
-     * 账号
-     */
-    private String userCode;
 
     /**
      * 姓名
@@ -29,17 +25,16 @@ public class UserBean {
      */
     private Date createTime;
 
+    /**
+     * 角色列表
+     */
+    private List<RoleBean> roleBean;
 
-    private RoleBean roleBean;
+    /**
+     * 资源列表
+     */
+    private List<PermissionBean> permissionBeans;
 
-
-    public String getUserCode() {
-        return userCode;
-    }
-
-    public void setUserCode(String userCode) {
-        this.userCode = userCode;
-    }
 
     public String getUserName() {
         return userName;
@@ -73,11 +68,19 @@ public class UserBean {
         this.createTime = createTime;
     }
 
-    public RoleBean getRoleBean() {
+    public List<RoleBean> getRoleBean() {
         return roleBean;
     }
 
-    public void setRoleBean(RoleBean roleBean) {
+    public void setRoleBean(List<RoleBean> roleBean) {
         this.roleBean = roleBean;
+    }
+
+    public List<PermissionBean> getPermissionBeans() {
+        return permissionBeans;
+    }
+
+    public void setPermissionBeans(List<PermissionBean> permissionBeans) {
+        this.permissionBeans = permissionBeans;
     }
 }

@@ -2,12 +2,10 @@ package com.byk.portal.controller;
 
 import com.byk.common.util.StringUtil;
 import com.byk.portal.bean.Oauth2ToKenBean;
-import com.byk.portal.remote.UserServerFeign;
 import com.byk.portal.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -40,7 +38,6 @@ public class LoginController {
      * @return
      */
     @RequestMapping(value="/loginSubmit")
-    //@HystrixCommand(fallbackMethod = "loginError")
     @PermitAll
     public String loginSubmit(String username, String password, Model model){
 
@@ -50,11 +47,21 @@ public class LoginController {
         Oauth2ToKenBean oauth2ToKenBean = loginService.signIn(username,password);
         if(oauth2ToKenBean != null){
             //token
-            String accessToken = oauth2ToKenBean.getAccess_token();
             model.addAttribute("stauts","SUCCESS");
-            model.addAttribute("access_token",accessToken);
+            model.addAttribute("token_type",oauth2ToKenBean.getToken_type());
+            model.addAttribute("access_token", oauth2ToKenBean.getAccess_token());
             return "login/loginSuccess";
         }
         return "login/loginError";
+    }
+
+    /**
+     * 登出
+     * @return
+     */
+    @RequestMapping(value = "/loginOut")
+    public String loginOut(){
+
+        return "login/login";
     }
 }

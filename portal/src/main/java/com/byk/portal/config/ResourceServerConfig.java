@@ -32,12 +32,4 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 .httpBasic();
     }
 
-    @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
-
-    @Bean // 声明TokenStore实现
-    public TokenStore tokenStore() {
-        return new RedisTokenStore(redisConnectionFactory);
-    }
-
 }

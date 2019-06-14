@@ -15,9 +15,9 @@ public class RoleBean {
     private String available;
 
     /**
-     * 资源列表
+     * 角色描述（页面展示）
      */
-    private List<PermissionBean> permissionBeans;
+    private String describe;
 
 
     public String getName() {
@@ -36,11 +36,11 @@ public class RoleBean {
         this.available = available;
     }
 
-    public List<PermissionBean> getPermissionBeans() {
-        return permissionBeans;
+    public String getDescribe() {
+        return describe;
     }
 
-    public void setPermissionBeans(List<PermissionBean> permissionBeans) {
-        this.permissionBeans = permissionBeans;
+    public void setDescribe(String describe) {
+        this.describe = describe;
     }
 }
