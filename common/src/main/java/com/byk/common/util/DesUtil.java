@@ -11,7 +11,7 @@ public class DesUtil {
 
     private static final byte[] INIT_KEY = {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00};
     private static final String ALGORITHM_ALL = "DES/CBC/NoPadding";
-    private static final String AlgorithmAll_DESede = "DESede/ECB/NoPadding";
+    private static final String ALGORITHM_ALL_DESEDE = "DESede/ECB/NoPadding";
 
     /**
      * DES加密
@@ -53,7 +53,7 @@ public class DesUtil {
             keyFactory = SecretKeyFactory.getInstance("DESede");
             SecretKey secretkey = keyFactory.generateSecret(dks);
             //创建Cipher对象 默认的DES/ECB/PKCS5Padding
-            Cipher cipher = Cipher.getInstance(AlgorithmAll_DESede, "SunJCE");
+            Cipher cipher = Cipher.getInstance(ALGORITHM_ALL_DESEDE, "SunJCE");
             //初始化Cipher对象
             cipher.init(Cipher.ENCRYPT_MODE, secretkey);
             result = cipher.doFinal(data);
@@ -79,7 +79,7 @@ public class DesUtil {
             keyFactory = SecretKeyFactory.getInstance("DESede");
             SecretKey secretkey = keyFactory.generateSecret(dks);
             //创建Cipher对象 默认的DES/ECB/PKCS5Padding
-            Cipher cipher = Cipher.getInstance(AlgorithmAll_DESede, "SunJCE");
+            Cipher cipher = Cipher.getInstance(ALGORITHM_ALL_DESEDE, "SunJCE");
             //初始化Cipher对象
             cipher.init(Cipher.DECRYPT_MODE, secretkey);
             result = cipher.doFinal(data);

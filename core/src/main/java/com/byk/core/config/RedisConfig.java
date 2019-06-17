@@ -4,7 +4,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisSentinelConfiguration;
+import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.StringRedisTemplate;
@@ -37,24 +39,6 @@ public class RedisConfig {
     @Value("${biz.redis.timeout}")
     private String timeout;
 
-    @Value("${login.redis.sentinel.master}")
-    private String loginMaster;
-    @Value("${login.redis.sentinel.nodes}")
-    private String loginNodes;
-    @Value("${login.redis.password}")
-    private String loginPassword;
-    @Value("${login.redis.database}")
-    private String loginDatabase;
-    @Value("${login.redis.pool.max-idle}")
-    private String loginMaxidle;
-    @Value("${login.redis.pool.min-idle}")
-    private String loginMinidle;
-    @Value("${login.redis.pool.max-active}")
-    private String loginMaxactive;
-    @Value("${login.redis.pool.max-wait}")
-    private String loginMaxwait;
-    @Value("${login.redis.timeout}")
-    private String loginTimeout;
 
     @Bean(name = "bizJedisConnectionFactory")
     @Primary
@@ -66,13 +50,15 @@ public class RedisConfig {
             sentinelConfiguration.sentinel(ip[0], Integer.parseInt(ip[1]));
         }
         sentinelConfiguration.setMaster(master);
+        sentinelConfiguration.setDatabase(Integer.parseInt(database));
+        sentinelConfiguration.setPassword(RedisPassword.of(password));
+
         JedisPoolConfig poolConfig = new JedisPoolConfig();
         poolConfig.setMinIdle(Integer.parseInt(minidle));
         poolConfig.setMaxIdle(Integer.parseInt(maxidle));
         poolConfig.setMaxTotal(Integer.parseInt(maxactive));
+
         JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory(sentinelConfiguration, poolConfig);
-        redisConnectionFactory.setPassword(password);
-        redisConnectionFactory.setDatabase(Integer.parseInt(database));
         redisConnectionFactory.setTimeout(Integer.parseInt(timeout));
         return redisConnectionFactory;
     }
@@ -91,41 +77,6 @@ public class RedisConfig {
     public StringRedisTemplate bizStringRedisTemplate() {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
         stringRedisTemplate.setConnectionFactory(bizJedisConnectionFactory());
-        return stringRedisTemplate;
-    }
-
-    @Bean(name = "loginJedisConnectionFactory")
-    public JedisConnectionFactory loginJedisConnectionFactory() {
-        RedisSentinelConfiguration sentinelConfiguration = new RedisSentinelConfiguration();
-        String[] node = loginNodes.split(",");
-        for (String str : node) {
-            String[] ip = str.split(":");
-            sentinelConfiguration.sentinel(ip[0], Integer.parseInt(ip[1]));
-        }
-        sentinelConfiguration.setMaster(loginMaster);
-        JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setMinIdle(Integer.parseInt(loginMinidle));
-        poolConfig.setMaxIdle(Integer.parseInt(loginMaxidle));
-        poolConfig.setMaxTotal(Integer.parseInt(loginMaxactive));
-        JedisConnectionFactory redisConnectionFactory = new JedisConnectionFactory(sentinelConfiguration, poolConfig);
-        redisConnectionFactory.setPassword(loginPassword);
-        redisConnectionFactory.setDatabase(Integer.parseInt(loginDatabase));
-        redisConnectionFactory.setTimeout(Integer.parseInt(loginTimeout));
-        return redisConnectionFactory;
-    }
-
-    @Bean(name = "loginRedisTemplate")
-    public RedisTemplate loginRedisTemplate() {
-        RedisTemplate redisTemplate = new RedisTemplate();
-        redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setConnectionFactory(loginJedisConnectionFactory());
-        return redisTemplate;
-    }
-
-    @Bean(name = "loginStringRedisTemplate")
-    public StringRedisTemplate loginStringRedisTemplate() {
-        StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(loginJedisConnectionFactory());
         return stringRedisTemplate;
     }
 }
