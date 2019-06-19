@@ -26,6 +26,13 @@ public class UserServiceImpl implements UserService {
         return userDao.findByUserCode(userCode);
     }
 
+    /**
+     * security会将查出来的用户权限信息存到redis中
+     * 这个方法在一定时间内不会重复查询，
+     * @param userName
+     * @return
+     * @throws UsernameNotFoundException
+     */
     @Override
     public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
         User user = userDao.findByUserCode(userName);
