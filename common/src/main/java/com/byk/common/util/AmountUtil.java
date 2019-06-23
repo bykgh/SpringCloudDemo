@@ -43,9 +43,9 @@ public class AmountUtil implements Serializable {
 
     public static double add(double v1, double v2) {
 
-        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b1 = BigDecimal.valueOf(v1);
 
-        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        BigDecimal b2 = BigDecimal.valueOf(v2);
 
         return b1.add(b2).doubleValue();
 
@@ -62,9 +62,9 @@ public class AmountUtil implements Serializable {
 
     public static double sub(double v1, double v2) {
 
-        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b1 = BigDecimal.valueOf(v1);
 
-        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        BigDecimal b2 = BigDecimal.valueOf(v2);
 
         return b1.subtract(b2).doubleValue();
 
@@ -81,9 +81,9 @@ public class AmountUtil implements Serializable {
 
     public static double mul(double v1, double v2) {
 
-        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b1 = BigDecimal.valueOf(v1);
 
-        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        BigDecimal b2 = BigDecimal.valueOf(v2);
 
         return b1.multiply(b2).doubleValue();
 
@@ -128,9 +128,9 @@ public class AmountUtil implements Serializable {
 
         }
 
-        BigDecimal b1 = new BigDecimal(Double.toString(v1));
+        BigDecimal b1 = BigDecimal.valueOf(v1);
 
-        BigDecimal b2 = new BigDecimal(Double.toString(v2));
+        BigDecimal b2 = BigDecimal.valueOf(v2);
 
         return b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue();
 
@@ -155,7 +155,7 @@ public class AmountUtil implements Serializable {
 
         }
 
-        BigDecimal b = new BigDecimal(Double.toString(v));
+        BigDecimal b = BigDecimal.valueOf(v);
 
         BigDecimal one = new BigDecimal("1");
 
@@ -209,7 +209,7 @@ public class AmountUtil implements Serializable {
     }
 
     /**
-     * @param int scale 保留的小数位
+     * @param scale 保留的小数位
      * @return double
      * example:
      * 1.7333 处理后： 1.74
@@ -228,7 +228,7 @@ public class AmountUtil implements Serializable {
 
         }
 
-        BigDecimal b = new BigDecimal(Double.toString(v));
+        BigDecimal b = BigDecimal.valueOf(v);
 
         BigDecimal one = new BigDecimal("1");
 
