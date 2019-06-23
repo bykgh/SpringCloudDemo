@@ -2,6 +2,9 @@ package com.byk.portal.service;
 
 import com.byk.common.beans.UserBean;
 
+/**
+ * @author yikai.bi
+ */
 public interface UserService {
 
     /**

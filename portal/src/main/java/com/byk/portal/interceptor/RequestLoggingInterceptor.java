@@ -11,6 +11,10 @@ import org.springframework.util.StreamUtils;
 import java.io.IOException;
 import java.nio.charset.Charset;
 
+/**
+ * 请求日志
+ * @author yikai.bi
+ */
 public class RequestLoggingInterceptor implements ClientHttpRequestInterceptor {
     private final static Logger LOGGER = LoggerFactory.getLogger(RequestLoggingInterceptor.class);
 

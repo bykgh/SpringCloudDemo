@@ -16,6 +16,9 @@ import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.Resource;
 
+/**
+ * @author yikai.bi
+ */
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -36,6 +39,12 @@ public class LoginServiceImpl implements LoginService {
     @Resource
     private RestTemplate defaultRestTemplate;
 
+    /**
+     * 请求认证中心认证
+     * @param username
+     * @param password
+     * @return
+     */
     @Override
     public Oauth2ToKenBean signIn(String username, String password) {
 

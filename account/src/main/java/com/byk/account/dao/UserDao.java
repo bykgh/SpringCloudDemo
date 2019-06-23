@@ -2,6 +2,10 @@ package com.byk.account.dao;
 
 import com.byk.account.entity.User;
 
+/**
+ * 用户信息表 dao
+ * @author yikai.bi
+ */
 public interface UserDao extends BaseDao<User,Long>{
 
     /**

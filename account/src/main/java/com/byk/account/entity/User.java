@@ -8,6 +8,10 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 用户信息表 实体类
+ * @author yikai.bi
+ */
 @Entity
 @Table(name="sys_user")
 @EntityListeners(AuditingEntityListener.class)

@@ -1,6 +1,9 @@
 package com.byk.common.beans;
 
-
+/**
+ * 资源bean
+ * @author yikai.bi
+ */
 public class PermissionBean {
 
     /**

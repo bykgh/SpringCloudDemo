@@ -1,5 +1,8 @@
 package com.byk.portal.bean;
 
+/**
+ * oauth2 认证信息 bean
+ */
 public class Oauth2ToKenBean {
     private String access_token;
     private String token_type;

@@ -7,6 +7,10 @@ import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Table;
 
+/**
+ * 资源表 实体类
+ * @author yikai.bi
+ */
 @Entity
 @Table(name="sys_permission")
 @EntityListeners(AuditingEntityListener.class)

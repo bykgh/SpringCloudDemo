@@ -7,11 +7,8 @@ import java.util.HashMap;
 
 /**
  * Title: Bean 工具类
- * Description:
- * Copyright: Copyright (c)2011
- * Company: pay
  *
- * @author huakui.zhang
+ * @author yikai.bi
  */
 public class BeanUtil {
 

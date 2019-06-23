@@ -8,11 +8,8 @@ import java.util.GregorianCalendar;
 
 /**
  * Title: 日期 工具类
- * Description:
- * Copyright: Copyright (c)2011
- * Company: pay
  *
- * @author huakui.zhang
+ * @author yikai.bi
  */
 public class DateUtil {
 

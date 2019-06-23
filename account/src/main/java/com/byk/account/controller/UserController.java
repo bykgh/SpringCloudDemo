@@ -24,6 +24,10 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * 用户权限接口
+ * @author  yikai.bi
+ */
 @RestController
 @RequestMapping("/api")
 public class UserController {

@@ -1,8 +1,8 @@
 package com.byk.common.common;
 
 /**
- * @Author: love
- * @Description:
+ * @Author: yikai.bi
+ * @Description: redis公共参数bean
  * @Date: 2019-06-19 17:33
  * @Version: 1.0
  */

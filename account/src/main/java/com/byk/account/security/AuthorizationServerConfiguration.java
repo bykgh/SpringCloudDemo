@@ -25,6 +25,7 @@ import javax.sql.DataSource;
 
 /**
  * 认证服务配置
+ * @author yikai.bi
  */
 @Configuration
 @EnableAuthorizationServer

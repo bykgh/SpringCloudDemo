@@ -3,6 +3,10 @@ package com.byk.account.entity;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * 角色表 实体类
+ * @author  yikai.bi
+ */
 @Entity
 @Table(name="sys_role")
 public class Role extends AutoIDEntity{

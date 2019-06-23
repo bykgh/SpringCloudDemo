@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletResponse;
  * 其他的自定义权限保护规则通过 HttpSecurity 来进行配置。
  *
  * @EnableResourceServer 注解自动增加了一个类型为 OAuth2AuthenticationProcessingFilter 的过滤器链，
+ * @author  yikai.bi
  */
 @Configuration
 @EnableResourceServer

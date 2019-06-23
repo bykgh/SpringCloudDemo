@@ -11,6 +11,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Enumeration;
 
+/**
+ * feign拦截器
+ * 用户自动在feign中拼接权限认证信息
+ * @yikai.bi
+ */
 @Configuration
 public class FeignInterceptor implements RequestInterceptor {
 

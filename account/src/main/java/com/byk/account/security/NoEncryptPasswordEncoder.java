@@ -2,6 +2,10 @@ package com.byk.account.security;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+/**
+ * 无密码验证。测试使用的类
+ * @author yikai.bi
+ */
 public class NoEncryptPasswordEncoder implements PasswordEncoder {
 
     @Override

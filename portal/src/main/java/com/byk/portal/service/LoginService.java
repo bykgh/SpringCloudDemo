@@ -2,6 +2,9 @@ package com.byk.portal.service;
 
 import com.byk.portal.bean.Oauth2ToKenBean;
 
+/**
+ * @author yikai.bi
+ */
 public interface LoginService {
 
     /**

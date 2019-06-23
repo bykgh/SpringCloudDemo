@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.security.PermitAll;
 
+/**
+ * 登录
+ * @author yikai.bi
+ */
 @Controller
 public class LoginController {
 

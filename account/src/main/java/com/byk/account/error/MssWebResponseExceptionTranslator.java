@@ -18,9 +18,7 @@ import java.io.IOException;
 /**
  * 〈异常翻译〉
  *
- * @author Curise
- * @create 2018/12/13
- * @since 1.0.0
+ * @author yikai.bi
  */
 public class MssWebResponseExceptionTranslator implements WebResponseExceptionTranslator {
     private ThrowableAnalyzer throwableAnalyzer = new DefaultThrowableAnalyzer();

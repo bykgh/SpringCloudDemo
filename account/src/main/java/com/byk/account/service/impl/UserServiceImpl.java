@@ -15,6 +15,9 @@ import org.springframework.stereotype.Service;
 import java.util.HashSet;
 import java.util.Set;
 
+/**
+ * @author yikai.bi
+ */
 @Service
 public class UserServiceImpl implements UserService {
 

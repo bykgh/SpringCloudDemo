@@ -5,11 +5,7 @@ import java.math.BigDecimal;
 
 /**
  * Title: 金额 工具类
- * Description:
- * Copyright: Copyright (c)2011
- * Company: pay
- *
- * @author huakui.zhang
+ * @author yikai.bi
  */
 public class AmountUtil implements Serializable {
     /**

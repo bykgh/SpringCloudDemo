@@ -4,6 +4,9 @@ import com.byk.common.beans.UserBean;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @author yikai.bi
+ */
 @FeignClient("account-server")
 public interface UserServerFeign {
 

@@ -3,6 +3,10 @@ package com.byk.common.beans;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 用户信息bean
+ * @author yikai.bi
+ */
 public class UserBean {
 
     /**

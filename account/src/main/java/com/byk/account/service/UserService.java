@@ -3,6 +3,9 @@ package com.byk.account.service;
 import com.byk.account.entity.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
+/**
+ * @author yikai.bi
+ */
 public interface UserService extends UserDetailsService {
 
     /**

@@ -1,6 +1,9 @@
 package com.byk.common.enums;
 
-
+/**
+ * 响应编码
+ * @author yikai.bi
+ */
 public enum ResultCode {
 
     //处理成功

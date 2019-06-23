@@ -20,6 +20,7 @@ import java.util.Properties;
 
 /**
  * 配置数据源
+ * @author yikai.bi
  */
 @Configuration
 public class DataSourceConfig {

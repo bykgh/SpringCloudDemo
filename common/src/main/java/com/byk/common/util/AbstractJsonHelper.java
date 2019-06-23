@@ -16,6 +16,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.TimeZone;
 
+/**
+ * json 工具类
+ * @author  yikai.bi
+ */
 public abstract class AbstractJsonHelper {
 
     public static JsonNode toTree(String json) throws IOException {

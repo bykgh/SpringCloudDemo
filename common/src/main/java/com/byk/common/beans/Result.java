@@ -1,9 +1,24 @@
 package com.byk.common.beans;
 
+/**
+ * response响应bean
+ * @author yikai.bi
+ */
 public class Result {
 
+    /**
+     * 响应编码
+     */
     private int code;
+    
+    /**
+     * 描述信息
+     */
     private String message;
+
+    /**
+     * data
+     */
     private Object data;
 
     public int getCode() {

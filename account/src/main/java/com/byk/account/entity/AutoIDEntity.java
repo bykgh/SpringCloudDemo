@@ -8,6 +8,10 @@ import org.apache.commons.logging.LogFactory;
 import javax.persistence.*;
 import java.lang.reflect.Field;
 
+/**
+ * id 和 乐观锁 自增长
+ * @author  yikai.bi
+ */
 @MappedSuperclass
 public class AutoIDEntity implements java.io.Serializable {
     /**

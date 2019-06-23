@@ -1,5 +1,9 @@
 package com.byk.common.beans;
 
+/**
+ * 角色bean
+ * @author yikai.bi
+ */
 public class RoleBean {
 
  /**

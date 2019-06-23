@@ -45,6 +45,9 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Supplier;
 
+/**
+ * @author yikai.bi
+ */
 @Configuration
 public class RestClientConfig {
     private static final Logger LOGGER = LoggerFactory.getLogger(RestClientConfig.class);

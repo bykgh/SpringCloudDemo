@@ -11,7 +11,11 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-
+/**
+ * spring security
+ * 用于解析用户权限json字符串的bean
+ * @author yikai.bi
+ */
 public class CustomUserDetails extends User implements UserDetails {
 
     private static final long serialVersionUID = 1702923242319850756L;
