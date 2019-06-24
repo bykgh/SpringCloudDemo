@@ -16,4 +16,9 @@ public class RedisCommon {
     public static String getUserInfoRedisKey(String userCode){
         return "GET_USER_INFO_KEY_"+userCode;
     }
+
+    /**
+     *  图形验证信息key
+     */
+    public static final String KAPTCHA_VER_CODE = "KAPTCHA_VER_CODE";
 }
