@@ -215,7 +215,7 @@ public class AmountUtil implements Serializable {
      * 1.7333 处理后： 1.74
      * 1.7699 处理后： 1.77
      * 1.3000 处理后： 1.30
-     * @Title: 进一法取值，返回不小于 value(保留scale位小数)的下一个数，将 value 的多余小数部分进一取值。
+     * @Title: 进一法取值，返回不小于 value(保留scale位小数)的下一个 数，将 value 的多余小数部分进一取值。
      * @Description:
      */
     public static double ceiling(double v, int scale) {
