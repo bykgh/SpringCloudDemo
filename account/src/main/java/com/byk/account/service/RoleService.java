@@ -29,4 +29,10 @@ public interface RoleService {
      */
     public Role update(Role role);
 
+    /**
+     * 根据id查询角色信息
+     * @param id
+     * @return
+     */
+    public Role findById(Long id);
 }

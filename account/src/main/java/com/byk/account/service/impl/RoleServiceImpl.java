@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * @author yikai.bi
@@ -44,5 +45,17 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role update(Role role) {
         return roleDao.save(role);
+    }
+
+    @Override
+    public Role findById(Long id) {
+        Role role = null;
+        try{
+            Optional<Role> optionalRole = roleDao.findById(id);
+            role = optionalRole.get();
+        }catch (IllegalArgumentException e){
+            //没查到什么都不用做
+        }
+        return role;
     }
 }
