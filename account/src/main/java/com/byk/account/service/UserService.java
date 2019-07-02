@@ -14,4 +14,18 @@ public interface UserService extends UserDetailsService {
      * @return
      */
     public User findByUserCode(String userCode);
+
+    /**
+     * 保存用户
+     * @param user
+     * @return
+     */
+    public User save(User user);
+
+    /**
+     * 更新用户信息
+     * @param user
+     * @return
+     */
+    public User update(User user);
 }

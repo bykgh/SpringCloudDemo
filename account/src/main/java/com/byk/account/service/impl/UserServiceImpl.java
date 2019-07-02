@@ -29,6 +29,16 @@ public class UserServiceImpl implements UserService {
         return userDao.findByUserCode(userCode);
     }
 
+    @Override
+    public User save(User user) {
+        return userDao.save(user);
+    }
+
+    @Override
+    public User update(User user) {
+        return userDao.save(user);
+    }
+
     /**
      * security会将查出来的用户权限信息存到redis中
      * 这个方法在一定时间内不会重复查询，
