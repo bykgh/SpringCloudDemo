@@ -59,8 +59,6 @@ public class MssWebResponseExceptionTranslator implements WebResponseExceptionTr
     private ResponseEntity<OAuth2Exception> handleOAuth2Exception(OAuth2Exception e) throws IOException {
 
         int status = e.getHttpErrorCode();
-        String error = e.getOAuth2ErrorCode();
-        String summary = e.getSummary();
         HttpHeaders headers = new HttpHeaders();
         headers.set("Cache-Control", "no-store");
         headers.set("Pragma", "no-cache");

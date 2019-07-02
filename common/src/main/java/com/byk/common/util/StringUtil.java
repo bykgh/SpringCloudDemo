@@ -110,7 +110,6 @@ public class StringUtil {
     public static String objectToJSONString(Object object, JsonConfig jsonConfig) {
         String JSONString = "";
         try {
-            JSONObject tempJSONObject = new JSONObject();
             if (object instanceof List) {
                 JSONString = JSONArray.fromObject(object, jsonConfig).toString();
             } else {

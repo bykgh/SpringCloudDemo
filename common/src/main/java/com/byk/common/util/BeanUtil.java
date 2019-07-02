@@ -28,7 +28,6 @@ public class BeanUtil {
         for (Method m : mt) {
             targetMap.put(m.getName(), m);
         }
-        Field[] ft = t.getDeclaredFields();
         Field[] fs = s.getDeclaredFields();
         for (Field f : fs) {
             String name = f.getName();

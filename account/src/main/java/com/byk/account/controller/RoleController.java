@@ -50,7 +50,7 @@ public class RoleController {
         Result result = new Result();
         result.setCode(ResultCode.SUCCESS.getCode());
         result.setMessage("更新角色信息成功");
-        return null;
+        return result;
     }
 
     @RequestMapping("/findAllRole")

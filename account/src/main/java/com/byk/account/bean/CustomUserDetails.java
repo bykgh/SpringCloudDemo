@@ -73,6 +73,6 @@ public class CustomUserDetails extends User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return getUserName();
+        return super.getUserName();
     }
 }
