@@ -1,11 +1,11 @@
 package com.byk.account.controller;
 
 import cn.hutool.core.bean.BeanUtil;
+import cn.hutool.core.bean.copier.CopyOptions;
 import com.byk.account.entity.User;
 import com.byk.account.service.UserService;
 import com.byk.common.beans.RegisterUserBean;
 import com.byk.common.beans.Result;
-import com.byk.common.beans.UserBean;
 import com.byk.common.enums.ResultCode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -48,8 +48,8 @@ public class RegisterUserController {
      */
     @RequestMapping("/updateUser")
     public Result updateUser(RegisterUserBean registerUserBean){
-        User user = new User();
-        BeanUtil.copyProperties(registerUserBean,user);
+        User user = userService.findByUserCode(registerUserBean.getUserCode());
+        BeanUtil.copyProperties(registerUserBean,user, CopyOptions.create().setIgnoreNullValue(false));
         userService.update(user);
 
         Result result = new Result();
