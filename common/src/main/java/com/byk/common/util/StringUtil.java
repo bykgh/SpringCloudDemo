@@ -71,18 +71,18 @@ public class StringUtil {
         srcStr = srcStr.toLowerCase();
         String org = "_";
 
-        String newString = "";
+        StringBuffer newString = new StringBuffer();
         int first = 0;
         while (srcStr.indexOf(org) != -1) {
             first = srcStr.indexOf(org);
             if (first != srcStr.length()) {
-                newString = newString + srcStr.substring(0, first);
+                newString.append(newString).append(srcStr.substring(0, first));
                 srcStr = srcStr.substring(first + org.length(), srcStr.length());
                 srcStr = firstCharacterToUpper(srcStr);
             }
         }
-        newString = newString + srcStr;
-        return newString;
+        newString.append(srcStr);
+        return newString.toString();
     }
 
     /**

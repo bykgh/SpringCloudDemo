@@ -54,30 +54,29 @@ public class AutoIDEntity implements java.io.Serializable {
     @Override
     public String toString() {
 
-        StringBuilder sb = null;
-        try {
-            Class<?> c = this.getClass();
-            Field[] fields = c.getDeclaredFields();
+        Class<?> c = this.getClass();
+        Field[] fields = c.getDeclaredFields();
 
-            sb = new StringBuilder();
-            sb.append(this.getClass().getName());
-            sb.append(" {");
+        StringBuilder sb  = new StringBuilder();
+        sb.append(this.getClass().getName());
+        sb.append(" {");
 
-            int i = 1;
-            for (Field fd : fields) {
-                fd.setAccessible(true);
-                sb.append(fd.getName());
-                sb.append(":");
+        int i = 1;
+        for (Field fd : fields) {
+            fd.setAccessible(true);
+            sb.append(fd.getName());
+            sb.append(":");
+            try {
                 sb.append(fd.get(this));
-                if (i != fields.length) {
-                    sb.append(", ");
-                }
-                i++;
+            } catch (IllegalAccessException e) {
+                log.error(e,e);
             }
-            sb.append("}");
-        } catch (Exception e) {
-            log.error("", e);
+            if (i != fields.length) {
+                sb.append(", ");
+            }
+            i++;
         }
+        sb.append("}");
         return sb.toString();
     }
 }
