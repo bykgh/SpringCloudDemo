@@ -6,6 +6,7 @@ package com.byk.common.beans;
  */
 public class PermissionBean {
 
+    private Long id;
     /**
      * 资源名称
      */
@@ -69,6 +70,14 @@ public class PermissionBean {
      */
     private Boolean show;
 
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
