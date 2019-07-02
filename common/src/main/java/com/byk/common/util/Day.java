@@ -589,9 +589,9 @@ public class Day
 //		 day.calendar_.getTime().getTime());
 //		 return (int) Math.round (millisBetween / (1000 * 60 * 60 * 24));
 
-        return (int) (Math.round(calendar_.getTime().getTime() / DAY_MILLIS
+        return (int) (Math.round(calendar_.getTime().getTime() / (double)DAY_MILLIS
                 + 0.5) - Math.round(day.calendar_.getTime().getTime()
-                / DAY_MILLIS + 0.5));
+                / (double)DAY_MILLIS + 0.5));
     }
 
 

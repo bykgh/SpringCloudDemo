@@ -28,9 +28,9 @@ public class CustomUserDetails extends User implements UserDetails {
 
     public CustomUserDetails(User user, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         if (user != null
-                && !StringUtils.isBlank(user.getUserName())
+                && !StringUtils.isBlank(user.getUsername())
                 && !StringUtils.isBlank(user.getPassword())) {
-            setUserName(user.getUserName());
+            setUsername(user.getUsername());
             setPassword(user.getPassword());
             this.enabled = enabled;
             this.accountNonExpired = accountNonExpired;
@@ -71,8 +71,4 @@ public class CustomUserDetails extends User implements UserDetails {
         return authorities;
     }
 
-    @Override
-    public String getUsername() {
-        return super.getUserName();
-    }
 }
