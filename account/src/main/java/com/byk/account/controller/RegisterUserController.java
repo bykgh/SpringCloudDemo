@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * @Author: love
+ * @Author: yikai.bi
  * @Description: 添加修改用户controller
  * @Date: 2019-07-02 11:19
  * @Version: 1.0
