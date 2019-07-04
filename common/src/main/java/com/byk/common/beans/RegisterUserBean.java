@@ -103,19 +103,37 @@ public class RegisterUserBean {
     }
 
     public Date getCreateTime() {
-        return createTime;
+        if (createTime == null)
+        {
+            return null;
+        }
+        return (Date)createTime.clone();
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        if (createTime == null)
+        {
+            this.createTime = null;
+        } else {
+            this.createTime = (Date)createTime.clone();
+        }
     }
 
     public Date getUpdateTime() {
-        return updateTime;
+        if (updateTime == null)
+        {
+            return null;
+        }
+        return (Date)updateTime.clone();
     }
 
     public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
+        if (updateTime == null)
+        {
+            this.updateTime = null;
+        } else {
+            this.updateTime = (Date)updateTime.clone();
+        }
     }
 
     public List<RoleBean> getRoles() {

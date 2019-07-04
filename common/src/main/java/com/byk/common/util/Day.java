@@ -30,7 +30,7 @@ import java.util.TimeZone;
  * <p>
  * Thanks to Paul Hill @ xmission.com for valuable contribution.
  */
-public class Day
+public final class Day
         implements Comparable, Cloneable, Serializable {
     protected Calendar calendar_;
 

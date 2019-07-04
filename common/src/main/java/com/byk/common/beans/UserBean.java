@@ -65,11 +65,20 @@ public class UserBean {
     }
 
     public Date getCreateTime() {
-        return createTime;
+        if (createTime == null)
+        {
+            return null;
+        }
+        return (Date)createTime.clone();
     }
 
     public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+        if (createTime == null)
+        {
+            this.createTime = null;
+        } else {
+            this.createTime = (Date)createTime.clone();
+        }
     }
 
     public List<RoleBean> getRoleBean() {

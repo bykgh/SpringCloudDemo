@@ -348,10 +348,13 @@ public class JsonUtils {
                                HashMap<String, Class> detailClass) {
         JSONObject jsonObject = JSONObject.fromObject(jsonString);
         T mainEntity = JsonUtils.toBean(jsonObject, mainClass);
-        for (Object key : detailClass.keySet()) {
+        Set<Map.Entry<String, Class>> entrySet = detailClass.entrySet();
+        Iterator<Map.Entry<String, Class>> iterator = entrySet.iterator();
+        while (iterator.hasNext()){
             try {
-                Class value = (Class) detailClass.get(key);
-                BeanUtils.setProperty(mainEntity, key.toString(), value);
+                Map.Entry<String, Class> entry = iterator.next();
+                Class value = entry.getValue();
+                BeanUtils.setProperty(mainEntity, entry.getKey(), value);
             } catch (Exception ex) {
                 throw new RuntimeException("主从关系JSON反序列化实体失败！");
             }

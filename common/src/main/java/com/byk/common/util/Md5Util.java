@@ -12,18 +12,18 @@ import java.util.TreeMap;
 public class Md5Util {
 
 
-    public static String hmacSign(String aValue, String aKey) {
+    public static String hmacSign(String aValue, String aKey) throws UnsupportedEncodingException {
         byte[] k_ipad = new byte[64];
         byte[] k_opad = new byte[64];
         byte[] keyb;
         byte[] value;
-        try {
+        //try {
             keyb = aKey.getBytes("UTF-8");
             value = aValue.getBytes("UTF-8");
-        } catch (UnsupportedEncodingException e) {
+       /* } catch (UnsupportedEncodingException e) {
             keyb = aKey.getBytes();
             value = aValue.getBytes();
-        }
+        }*/
 
         Arrays.fill(k_ipad, keyb.length, 64, (byte) 54);
         Arrays.fill(k_opad, keyb.length, 64, (byte) 92);
@@ -133,7 +133,7 @@ public class Md5Util {
             String mvalue = entry.getValue();
 
             if(!StringUtils.isBlank(mkey)&&!StringUtils.isBlank(mvalue)){
-                String temValue = new String(mvalue);
+                String temValue = mvalue;
                 //如果 mvalue 包含转移 \ 去除
                 if(temValue.contains("\\")){
                     temValue = temValue.replace("\\", "");
@@ -151,7 +151,7 @@ public class Md5Util {
         /** 加密 、转大写 */
         retMsg = getMd5Str(retMsg).toUpperCase();
         //logger.info("加密验签字符串为： " + retMsg);
-        return retMsg.toString();
+        return retMsg;
     }
 
 }

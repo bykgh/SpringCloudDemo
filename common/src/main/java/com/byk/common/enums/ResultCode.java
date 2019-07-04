@@ -44,10 +44,6 @@ public enum ResultCode {
         return code;
     }
 
-    public void setCode(int code) {
-        this.code = code;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -56,7 +52,4 @@ public enum ResultCode {
         return String.format(this.message, message == null ? "" : message);
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

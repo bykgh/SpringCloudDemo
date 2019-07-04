@@ -89,7 +89,7 @@ public class UserController {
              roleBeans.add(roleBean);
              List<Permission> permissions = role.getPermission();
              for (Permission permission : permissions) {
-                 if(AccountCommon.ShowType.HIDE.equals(permission.getShow())){
+                 if(!permission.getShow()){
                      continue;
                  }
 
