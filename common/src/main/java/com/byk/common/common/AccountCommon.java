@@ -34,4 +34,20 @@ public class AccountCommon {
          */
         public static final String BUTTON = "BUTTON";
     }
+
+    /**
+     * 是否展示
+     */
+    public static class ShowType{
+
+        /**
+         * 显示
+         */
+        public static final String SHOW = "1";
+
+        /**
+         * 隐藏
+         */
+        public static final String HIDE = "0";
+    }
 }

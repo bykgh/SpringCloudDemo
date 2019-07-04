@@ -8,6 +8,7 @@ import com.byk.common.beans.PermissionBean;
 import com.byk.common.beans.Result;
 import com.byk.common.beans.RoleBean;
 import com.byk.common.beans.UserBean;
+import com.byk.common.common.AccountCommon;
 import com.byk.common.enums.ResultCode;
 import com.byk.common.util.BeanUtil;
 import org.slf4j.Logger;
@@ -69,7 +70,7 @@ public class UserController {
     }
 
     /**
-     * 查询用户的单权限角色信息
+     * 查询用户的菜单权限角色信息
      * @return
      */
      @RequestMapping("/findUser")
@@ -88,6 +89,10 @@ public class UserController {
              roleBeans.add(roleBean);
              List<Permission> permissions = role.getPermission();
              for (Permission permission : permissions) {
+                 if(AccountCommon.ShowType.HIDE.equals(permission.getShow())){
+                     continue;
+                 }
+
                  PermissionBean permissionBean = new PermissionBean();
                  BeanUtil.copyProperties(permission,permissionBean);
                  if(!permissionBeans.contains(permissionBean)){
