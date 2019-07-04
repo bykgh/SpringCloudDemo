@@ -1,5 +1,6 @@
 package com.byk.portal.controller;
 
+import com.byk.common.common.PortalCommon;
 import com.byk.common.common.RedisCommon;
 import com.byk.common.util.StringUtil;
 import com.byk.portal.bean.Oauth2ToKenBean;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * 登录
@@ -27,9 +29,6 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
-
-    @Resource
-    private StringRedisTemplate stringRedisTemplate;
 
     /**
      * 跳转登录页面
@@ -51,7 +50,7 @@ public class LoginController {
      */
     @RequestMapping(value="/loginSubmit")
     @PermitAll
-    public String loginSubmit(String username, String password,String kaptchaVerCode, Model model){
+    public String loginSubmit(HttpServletRequest request,String username, String password, String kaptchaVerCode, Model model){
 
         if (StringUtil.isNull(username) || StringUtil.isNull(password)){
             model.addAttribute("stauts","FAILED");
@@ -59,14 +58,13 @@ public class LoginController {
             return "login/loginError";
         }
 
-        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
-        String verCode = ops.get(RedisCommon.KAPTCHA_VER_CODE + username);
+        String verCode =  String.valueOf(request.getSession().getAttribute(PortalCommon.VER_CODE_SESSION_KEY));
         if(verCode == null || !verCode.equalsIgnoreCase(kaptchaVerCode)){
             model.addAttribute("stauts","FAILED");
             model.addAttribute("msg","验证码错误");
             return "login/loginError";
         }else{
-            stringRedisTemplate.delete(RedisCommon.KAPTCHA_VER_CODE + username);
+            request.getSession().removeAttribute(PortalCommon.VER_CODE_SESSION_KEY);
         }
 
 

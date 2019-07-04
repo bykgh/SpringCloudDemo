@@ -27,9 +27,12 @@
             <form class="form-signin" action="/portal/loginSubmit" method="post">
                 <h2 class="form-signin-heading">登录</h2>
                 <label for="username" class="sr-only">用户名</label>
-                <input type="text" id="username" name="username" class="form-control" placeholder="Email address" required="" autofocus="">
+                <input type="text" id="username" name="username" class="form-control" required="" autofocus="">
                 <label for="password" class="sr-only">密码</label>
                 <input type="password" id="password" name="password" class="form-control" placeholder="password" required="">
+                <label for="kaptchaVerCode" class="sr-only">验证码</label>
+                <input type="text" id="kaptchaVerCode" name="kaptchaVerCode" class="form-control" required="" autofocus="">
+                <input type="image" id="verCodeImage" name="verCodeImage" src="/kaptcha/verCode" class="form-control" required="">
                 <div class="checkbox">
                   <label>
                     <input type="checkbox" value="remember-me"> Remember me
