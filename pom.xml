@@ -41,6 +41,8 @@
         <module>common</module>
         <!-- 配置中心 -->
         <module>config</module>
+        <!-- 监控中心 -->
+        <module>admin</module>
     </modules>
 
     <dependencies>
