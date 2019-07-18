@@ -13,12 +13,6 @@
     <name>admin</name>
     <description>Demo project for Spring Boot</description>
 
-    <properties>
-        <java.version>1.8</java.version>
-        <spring-boot-admin.version>2.1.5</spring-boot-admin.version>
-        <spring-cloud.version>Greenwich.SR2</spring-cloud.version>
-    </properties>
-
     <dependencies>
         <dependency>
             <groupId>de.codecentric</groupId>
@@ -35,6 +29,11 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-security</artifactId>
+        </dependency>
+        <!--JMX-bean 管理-->
+        <dependency>
+            <groupId>org.jolokia</groupId>
+            <artifactId>jolokia-core</artifactId>
         </dependency>
 
         <dependency>
