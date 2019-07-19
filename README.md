@@ -22,7 +22,7 @@ maven
 jar
 
 ### 技术选型：  
-#### 前端：  
+#### 前端（待完善）：  
  jquery  
  bootstarp 3.3  
  thymeleaf
