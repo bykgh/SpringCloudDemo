@@ -2,6 +2,10 @@
 <configuration debug="false">
     <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径 -->
     <property name="LOG_HOME" value="${catalina.home}/logs"/>
+
+    <include resource="org/springframework/boot/logging/logback/base.xml"/>
+    <jmxConfigurator/>
+
     <!-- 控制台输出 -->
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
@@ -13,11 +17,6 @@
     <logger name="org.springframework.security" level="INFO" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
-
-    <configuration>
-        <include resource="org/springframework/boot/logging/logback/base.xml"/>
-        <jmxConfigurator/>
-    </configuration>
 
     <!-- 日志输出级别 -->
     <root level="INFO">
