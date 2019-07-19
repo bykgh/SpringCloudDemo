@@ -6,7 +6,7 @@
 
 ### 项目结构:  
 oms  
-|--doc 文档、sql  
+|--doc 文档、sql  （待完善）
 |--config-repo 注册中心配置文件资源  
 |--refistry 注册中心  
 |--gateway 网关  
@@ -15,7 +15,7 @@ oms
 |--common 公共bean、util  
 |--account 单点、认证服务、用户信息相关服务  
 |--config 配置中心（计划中）  
-|--admin 监控中心（计划中）
+|--admin 监控中心
 
 ### 打包方式
 maven
@@ -37,7 +37,8 @@ Security-OAuth2 密码模式
 spring data jpa 持久化  
 ribbon 负载均衡  
 hystrix 容错保护  
-zuul 网关
+zuul 网关  
+Alibaba Druid 数据库连接池（计划中）
 
 #### 数据库：  
 mysql
@@ -88,3 +89,5 @@ redis 4.0.8
             <artifactId>spring-security-oauth2</artifactId>
             <version>2.3.4.RELEASE</version>
         </dependency>
+####  4.spring boot admin 偶尔抛出  java.io.IOException
+     问题查中，暂未解决
