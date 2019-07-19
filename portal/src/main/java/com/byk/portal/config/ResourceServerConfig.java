@@ -24,7 +24,9 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter {
                 //.requestMatchers().antMatchers("/**")
                 //.and()
                 .authorizeRequests()
-                .antMatchers("/login","/loginSubmit","/templates/**","/static/**","/kaptcha/**").permitAll().anyRequest().authenticated()
+                .antMatchers("/login","/loginSubmit","/templates/**","/static/**","/kaptcha/**").permitAll()
+                .antMatchers("/actuator/**").permitAll()
+                .anyRequest().authenticated()
                 .antMatchers("/**").authenticated()
                 .and()
                 .httpBasic();
