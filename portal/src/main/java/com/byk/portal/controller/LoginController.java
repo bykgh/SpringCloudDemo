@@ -1,20 +1,19 @@
 package com.byk.portal.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.byk.common.beans.UserBean;
 import com.byk.common.common.PortalCommon;
-import com.byk.common.common.RedisCommon;
 import com.byk.common.util.StringUtil;
 import com.byk.portal.bean.Oauth2ToKenBean;
 import com.byk.portal.service.LoginService;
+import com.byk.portal.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.annotation.Resource;
 import javax.annotation.security.PermitAll;
 import javax.servlet.http.HttpServletRequest;
 
@@ -29,6 +28,9 @@ public class LoginController {
 
     @Autowired
     private LoginService loginService;
+
+    @Autowired
+    private UserService userService;
 
     /**
      * 跳转登录页面
@@ -70,11 +72,13 @@ public class LoginController {
 
         Oauth2ToKenBean oauth2ToKenBean = loginService.signIn(username,password);
         if(oauth2ToKenBean != null){
+            UserBean userBean =  userService.findUser();
             //token
             model.addAttribute("msg","登录成功");
             model.addAttribute("stauts","SUCCESS");
             model.addAttribute("token_type",oauth2ToKenBean.getToken_type());
             model.addAttribute("access_token", oauth2ToKenBean.getAccess_token());
+            model.addAttribute("userInfo", JSONObject.toJSONString(userBean));
             return "login/loginSuccess";
         }
         return "login/loginError";
