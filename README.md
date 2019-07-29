@@ -43,11 +43,6 @@ Alibaba Druid 数据库连接池（计划中）
 #### 数据库：  
 mysql
 
-### 开发环境
-macOS  
-intelliJ IDEA  
-java jdk 1.8
-
 ### 部署环境
 Red Hat Enterprise Linux  6.0  
 redis 4.0.8

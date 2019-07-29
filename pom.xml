@@ -40,8 +40,9 @@
         <module>account</module>
         <!-- 公共服务 -->
         <module>common</module>
-        <!-- 配置中心 -->
+        <!-- 配置中心
         <module>config</module>
+        -->
         <!-- 监控中心 -->
         <module>admin</module>
     </modules>
