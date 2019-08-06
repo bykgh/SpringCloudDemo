@@ -29,9 +29,6 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
 
-    @Autowired
-    private UserService userService;
-
     /**
      * 跳转登录页面
      * @return
@@ -72,13 +69,11 @@ public class LoginController {
 
         Oauth2ToKenBean oauth2ToKenBean = loginService.signIn(username,password);
         if(oauth2ToKenBean != null){
-            UserBean userBean =  userService.findUser();
             //token
             model.addAttribute("msg","登录成功");
             model.addAttribute("stauts","SUCCESS");
             model.addAttribute("token_type",oauth2ToKenBean.getToken_type());
             model.addAttribute("access_token", oauth2ToKenBean.getAccess_token());
-            model.addAttribute("userInfo", JSONObject.toJSONString(userBean));
             return "login/loginSuccess";
         }
         return "login/loginError";
