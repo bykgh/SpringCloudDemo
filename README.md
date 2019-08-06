@@ -6,7 +6,7 @@
 
 ### 项目结构:  
 SpringCloudDemo  
-|--doc 文档、sql  （待完善）
+|--doc 文档、sql  （待完善）  
 |--config-repo 注册中心配置文件资源  
 |--refistry 注册中心  
 |--gateway 网关  
