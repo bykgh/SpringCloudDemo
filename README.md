@@ -1,11 +1,11 @@
-# OMS
-## 运营管理系统
+# springCloudDemo
+## springCloud 整合实例项目
 
 ### 目的:  
 用于个人学习，技术整理总结
 
 ### 项目结构:  
-oms  
+springCloudDemo  
 |--doc 文档、sql  （待完善）
 |--config-repo 注册中心配置文件资源  
 |--refistry 注册中心  

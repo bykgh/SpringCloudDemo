@@ -4,14 +4,14 @@
 <modelVersion>4.0.0</modelVersion>
 <parent>
     <groupId>com.byk</groupId>
-    <artifactId>oms</artifactId>
+    <artifactId>springCloudDemo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 </parent>
 <groupId>com.byk</groupId>
 <artifactId>common</artifactId>
 <version>0.0.1-SNAPSHOT</version>
 <name>common</name>
-<description>oms project for Spring Boot</description>
+<description>springCloudDemo project for Spring Boot</description>
 
 <dependencies>
 
