@@ -39,9 +39,9 @@ public class RedisConfig {
     private String timeout;
 
 
-    @Bean(name = "bizJedisConnectionFactory")
+    @Bean(name = "springCloudDemoJedisConnectionFactory")
     @Primary
-    public JedisConnectionFactory bizJedisConnectionFactory() {
+    public JedisConnectionFactory springCloudDemoJedisConnectionFactory() {
         RedisSentinelConfiguration sentinelConfiguration = new RedisSentinelConfiguration();
         String[] node = nodes.split(",");
         for (String str : node) {
@@ -62,20 +62,20 @@ public class RedisConfig {
         return redisConnectionFactory;
     }
 
-    @Bean(name = "bizRedisTemplate")
+    @Bean(name = "springCloudDemoRedisTemplate")
     @Primary
-    public RedisTemplate bizRedisTemplate() {
+    public RedisTemplate springCloudDemoRedisTemplate() {
         RedisTemplate redisTemplate = new RedisTemplate();
         redisTemplate.setKeySerializer(new StringRedisSerializer());
-        redisTemplate.setConnectionFactory(bizJedisConnectionFactory());
+        redisTemplate.setConnectionFactory(springCloudDemoJedisConnectionFactory());
         return redisTemplate;
     }
 
-    @Bean(name = "bizStringRedisTemplate")
+    @Bean(name = "springCloudDemoStringRedisTemplate")
     @Primary
-    public StringRedisTemplate bizStringRedisTemplate() {
+    public StringRedisTemplate springCloudDemoStringRedisTemplate() {
         StringRedisTemplate stringRedisTemplate = new StringRedisTemplate();
-        stringRedisTemplate.setConnectionFactory(bizJedisConnectionFactory());
+        stringRedisTemplate.setConnectionFactory(springCloudDemoJedisConnectionFactory());
         return stringRedisTemplate;
     }
 }

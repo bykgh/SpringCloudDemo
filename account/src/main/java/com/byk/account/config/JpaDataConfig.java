@@ -13,8 +13,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableJpaRepositories(
         basePackageClasses = UserDao.class,
-        entityManagerFactoryRef = "omsEntityManagerFactory",
-        transactionManagerRef = "omsTransactionManager"
+        entityManagerFactoryRef = "springCloudDemoEntityManagerFactory",
+        transactionManagerRef = "springCloudDemoTransactionManager"
 )
 public class JpaDataConfig {
 }

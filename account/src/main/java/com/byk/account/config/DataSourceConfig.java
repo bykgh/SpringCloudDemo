@@ -27,10 +27,10 @@ public class DataSourceConfig {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfig.class);
 
-    @Bean(name = "omsDataSource")
+    @Bean(name = "springCloudDemoDataSource")
     @Primary
-    public DataSource omsDataSource() {
-        DataSourceProperties manDataSourceProperties = omsDataSourceProperties();
+    public DataSource springCloudDemoDataSource() {
+        DataSourceProperties manDataSourceProperties = springCloudDemoDataSourceProperties();
         return DataSourceBuilder.create()
                 .driverClassName(manDataSourceProperties.getDriverClassName())
                 .url(manDataSourceProperties.getUrl())
@@ -40,11 +40,11 @@ public class DataSourceConfig {
     }
 
 
-    @Bean(name = "omsEntityManagerFactory")
+    @Bean(name = "springCloudDemoEntityManagerFactory")
     @Primary
-    public LocalContainerEntityManagerFactoryBean omsEntityManagerFactory(EntityManagerFactoryBuilder builder) {
+    public LocalContainerEntityManagerFactoryBean springCloudDemoEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         LocalContainerEntityManagerFactoryBean em = builder
-                .dataSource(omsDataSource())
+                .dataSource(springCloudDemoDataSource())
                 .packages(User.class)
                 .persistenceUnit("oms")
                 .build();
@@ -56,15 +56,15 @@ public class DataSourceConfig {
         return em;
     }
 
-    @Bean(name = "ormTransactionManager")
-    public PlatformTransactionManager omsTransactionManager(EntityManagerFactoryBuilder builder) {
-        return new JpaTransactionManager(omsEntityManagerFactory(builder).getObject());
+    @Bean(name = "springCloudDemoTransactionManager")
+    public PlatformTransactionManager springCloudDemoTransactionManager(EntityManagerFactoryBuilder builder) {
+        return new JpaTransactionManager(springCloudDemoEntityManagerFactory(builder).getObject());
     }
 
     @Bean
     @Primary
     @ConfigurationProperties(prefix="spring.datasource")
-    public DataSourceProperties omsDataSourceProperties() { //2
+    public DataSourceProperties springCloudDemoDataSourceProperties() { //2
         return new DataSourceProperties();
     }
 
