@@ -15,6 +15,7 @@ oms
 |--common 公共bean、util  
 |--account 单点、认证服务、用户信息相关服务  
 |--config 配置中心（计划中）  
+|--bus 消息总线程（计划中）
 |--admin 监控中心
 
 ### 打包方式
