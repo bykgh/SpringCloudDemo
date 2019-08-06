@@ -37,16 +37,12 @@ Spring Security、OAuth2  权限控制、第三方接入
 Security-OAuth2 密码模式  
 spring data jpa 持久化  
 ribbon 负载均衡  
-hystrix 容错保护  
+hystrix 容错保护（计划中）  
 zuul 网关  
 Alibaba Druid 数据库连接池（计划中）
 
 #### 数据库：  
 mysql
-
-### 部署环境
-Red Hat Enterprise Linux  6.0  
-redis 4.0.8
 
 ###  框架选择更改记录
  1. shiro 不适合分布式权限验证，改为 Spring Security、OAuth2 
