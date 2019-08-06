@@ -5,7 +5,7 @@
 用于个人学习，技术整理总结
 
 ### 项目结构:  
-springCloudDemo  
+SpringCloudDemo  
 |--doc 文档、sql  （待完善）
 |--config-repo 注册中心配置文件资源  
 |--refistry 注册中心  
