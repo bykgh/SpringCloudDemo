@@ -17,23 +17,23 @@ import redis.clients.jedis.JedisPoolConfig;
 //@Configuration
 public class RedisConfig {
 
-    @Value("${biz.redis.sentinel.master}")
+    @Value("${redis.sentinel.master}")
     private String master;
-    @Value("${biz.redis.sentinel.nodes}")
+    @Value("${redis.sentinel.nodes}")
     private String nodes;
-    @Value("${biz.redis.password}")
+    @Value("${redis.password}")
     private String password;
-    @Value("${biz.redis.database}")
+    @Value("${redis.database}")
     private String database;
-    @Value("${biz.redis.pool.max-idle}")
+    @Value("${redis.pool.max-idle}")
     private String maxidle;
-    @Value("${biz.redis.pool.min-idle}")
+    @Value("${redis.pool.min-idle}")
     private String minidle;
-    @Value("${biz.redis.pool.max-active}")
+    @Value("${redis.pool.max-active}")
     private String maxactive;
-    @Value("${biz.redis.pool.max-wait}")
+    @Value("${redis.pool.max-wait}")
     private String maxwait;
-    @Value("${biz.redis.timeout}")
+    @Value("${redis.timeout}")
     private String timeout;
 
 
