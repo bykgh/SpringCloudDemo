@@ -30,14 +30,17 @@ jar
  
 #### 后端：  
 spring cloud   
-spring boot  
+-hystrix 容错保护（计划中）  
+-zuul 网关  
+-bus RabbitMQ 消息总线程
+-feign 声明式服务调用
+-eureka 服务管理  
+-ribbon 负载均衡  
 redis  缓存  
 Spring Security、OAuth2  权限控制、第三方接入   
 Security-OAuth2 密码模式  
 spring data jpa 持久化  
-ribbon 负载均衡  
-hystrix 容错保护（计划中）  
-zuul 网关  
+
 Alibaba Druid 数据库连接池（计划中）
 
 #### 数据库：  
