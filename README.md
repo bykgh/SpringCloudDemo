@@ -32,8 +32,8 @@ jar
 spring cloud   
 -hystrix 容错保护（计划中）  
 -zuul 网关  
--bus RabbitMQ 消息总线程
--feign 声明式服务调用
+-bus RabbitMQ 消息总线程  
+-feign 声明式服务调用  
 -eureka 服务管理  
 -ribbon 负载均衡  
 redis  缓存  
