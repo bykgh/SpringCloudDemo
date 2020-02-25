@@ -1,4 +1,4 @@
-package com.byk.bus.rabbitmq;
+package com.byk.core.mq;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

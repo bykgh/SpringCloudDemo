@@ -45,8 +45,6 @@
         -->
         <!-- 监控中心 -->
         <module>admin</module>
-        <!-- 消息总线程 -->
-        <module>bus</module>
     </modules>
 
     <dependencies>
