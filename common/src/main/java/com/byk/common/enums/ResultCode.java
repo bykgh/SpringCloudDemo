@@ -31,7 +31,7 @@ public enum ResultCode {
     PARAM_PARAMETER_IS_NULL(502, "Parameter is null"),
     ;
 
-    private int code;
+    private Integer code;
 
     private String message;
 
@@ -40,7 +40,7 @@ public enum ResultCode {
         this.message = message;
     }
 
-    public int getCode() {
+    public Integer getCode() {
         return code;
     }
 
