@@ -1,44 +1,29 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : localhost
- Source Server Type    : MySQL
- Source Server Version : 80015
- Source Host           : localhost:3306
- Source Schema         : oms
-
- Target Server Type    : MySQL
- Target Server Version : 80015
- File Encoding         : 65001
-
- Date: 21/07/2019 21:48:21
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
 -- ----------------------------
 -- Table structure for sys_user
 -- ----------------------------
 DROP TABLE IF EXISTS `sys_user`;
-CREATE TABLE `sys_user`  (
-  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT 'id',
-  `optimistic` int(11) NOT NULL DEFAULT 1 COMMENT '乐观锁',
-  `user_code` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '账号',
-  `user_name` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '姓名',
-  `password` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '密码',
-  `source` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '所属源',
-  `slat` varchar(64) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL COMMENT '盐',
-  `locked` varchar(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL COMMENT '账号是否锁定，1：锁定，0未锁定',
-  `create_time` datetime(0) NULL DEFAULT NULL COMMENT '创建时间',
-  `update_time` datetime(0) NULL DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci COMMENT = '用户表（主体）' ROW_FORMAT = Dynamic;
+CREATE TABLE `sys_user` (
+        `id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '用户 ID',
+        `optimistic` int(11) NOT NULL DEFAULT 1 COMMENT '乐观锁',
+        `username` varchar(50) NOT NULL COMMENT '用户名',
+        `password` varchar(64) NOT NULL COMMENT '密码，加密存储, admin/1234',
+        `is_account_non_expired` int(2) DEFAULT '1' COMMENT '帐户是否过期(1 未过期，0已过期)',
+        `is_account_non_locked` int(2) DEFAULT '1' COMMENT '帐户是否被锁定(1 未过期，0已过期)',
+        `is_credentials_non_expired` int(2) DEFAULT '1' COMMENT '密码是否过期(1 未过期，0已过期)',
+        `is_enabled` int(2) DEFAULT '1' COMMENT '帐户是否可用(1 可用，0 删除用户)',
+        `nick_name` varchar(64) DEFAULT NULL COMMENT '昵称',
+        `mobile` varchar(20) DEFAULT NULL COMMENT '注册手机号',
+        `email` varchar(50) DEFAULT NULL COMMENT '注册邮箱',
+        `create_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        `update_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        PRIMARY KEY (`id`),
+        UNIQUE KEY `username` (`username`) USING BTREE,
+        UNIQUE KEY `mobile` (`mobile`) USING BTREE,
+        UNIQUE KEY `email` (`email`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES (1, 1, 'admin', 'admin', '$2a$10$ziFVXeEsG.JkHwh3M7CvCu9pEWyMi7T1tPyAJaqXEeHrVnLn7mxkG', NULL, '11', '1', '2019-06-10 11:41:15', '2019-06-10 11:41:18');
-INSERT INTO `sys_user` VALUES (2, 1, 'user', 'user', '$2a$10$ziFVXeEsG.JkHwh3M7CvCu9pEWyMi7T1tPyAJaqXEeHrVnLn7mxkG', NULL, '11', '1', '2019-06-11 11:18:47', '2019-06-11 11:18:49');
-
-SET FOREIGN_KEY_CHECKS = 1;
+INSERT INTO `sys_user` VALUES ('9', 1, 'admin', '$2a$10$rDkPvvAFV8kqwvKJzwlRv.i.q.wz1w1pz0SFsHn/55jNeZFQv/eCm', '1', '1', '1', '1', '梦学谷', '16888888888', 'mengxuegu888@163.com', '2023-08-08 11:11:11', '2019-12-16 10:25:53');
+INSERT INTO `sys_user` VALUES ('10', 1, 'test', '$2a$10$rDkPvvAFV8kqwvKJzwlRv.i.q.wz1w1pz0SFsHn/55jNeZFQv/eCm', '1', '1', '1', '1', '测试', '16888886666', 'test11@qq.com', '2023-08-08 11:11:11', '2023-08-08 11:11:11');
