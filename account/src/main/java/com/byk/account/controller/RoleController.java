@@ -3,8 +3,8 @@ package com.byk.account.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import com.alibaba.fastjson.JSONObject;
-import com.byk.account.entity.Role;
-import com.byk.account.service.RoleService;
+import com.byk.account.entity.SysRole;
+import com.byk.account.service.SysRoleService;
 import com.byk.common.beans.Result;
 import com.byk.common.beans.RoleBean;
 import com.byk.common.enums.ResultCode;
@@ -30,11 +30,11 @@ public class RoleController {
 
 
     @Autowired
-    public RoleService roleService;
+    public SysRoleService roleService;
 
     @RequestMapping("/addRole")
     public Result addRole(RoleBean roleBean){
-        Role role = new Role();
+        SysRole role = new SysRole();
         BeanUtil.copyProperties(roleBean,role, CopyOptions.create().setIgnoreNullValue(false));
         roleService.save(role);
         Result result = new Result();
@@ -45,7 +45,7 @@ public class RoleController {
 
     @RequestMapping("/updateRole")
     public Result updateRole(RoleBean roleBean){
-        Role role = roleService.findById(roleBean.getId());
+        SysRole role = roleService.findById(roleBean.getId());
         BeanUtil.copyProperties(roleBean,role, CopyOptions.create().setIgnoreNullValue(false));
         Result result = new Result();
         result.setCode(ResultCode.SUCCESS.getCode());
@@ -55,7 +55,7 @@ public class RoleController {
 
     @RequestMapping("/findAllRole")
     public Result findAllRole(){
-        List<Role> roleList = roleService.findAllRole();
+        List<SysRole> roleList = roleService.findAllRole();
         Result result = new Result();
         result.setCode(ResultCode.SUCCESS.getCode());
         result.setMessage(ResultCode.SUCCESS.getMessage());

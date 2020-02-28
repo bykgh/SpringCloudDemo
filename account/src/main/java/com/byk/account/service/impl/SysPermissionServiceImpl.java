@@ -1,8 +1,8 @@
 package com.byk.account.service.impl;
 
-import com.byk.account.dao.PermissionDao;
-import com.byk.account.entity.Permission;
-import com.byk.account.service.PermissionService;
+import com.byk.account.dao.SysPermissionDao;
+import com.byk.account.entity.SysPermission;
+import com.byk.account.service.SysPermissionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,33 +15,33 @@ import java.util.Optional;
  * @author yikai.bi
  */
 @Service
-public class PermissionServiceImpl implements PermissionService {
+public class SysPermissionServiceImpl implements SysPermissionService {
 
-    private static final Logger logger = LoggerFactory.getLogger(PermissionServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(SysPermissionServiceImpl.class);
 
     @Autowired
-    private PermissionDao permissionDao;
+    private SysPermissionDao permissionDao;
 
     @Override
-    public List<Permission> findAllPermissionList() {
+    public List<SysPermission> findAllPermissionList() {
         return permissionDao.findAll();
     }
 
     @Override
-    public Permission save(Permission permission) {
+    public SysPermission save(SysPermission permission) {
         return permissionDao.save(permission);
     }
 
     @Override
-    public Permission update(Permission permission) {
+    public SysPermission update(SysPermission permission) {
         return permissionDao.save(permission);
     }
 
     @Override
-    public Permission findById(Long id) {
-        Permission permission = null;
+    public SysPermission findById(Long id) {
+        SysPermission permission = null;
         try{
-            Optional<Permission> optionalPermission = permissionDao.findById(id);
+            Optional<SysPermission> optionalPermission = permissionDao.findById(id);
             permission =optionalPermission.get();
         }catch (IllegalArgumentException e){
             //logger.error("find permission by id IllegalArgumentException ："+e,e);

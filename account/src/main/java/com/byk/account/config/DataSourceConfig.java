@@ -1,6 +1,6 @@
 package com.byk.account.config;
 
-import com.byk.account.entity.User;
+import com.byk.account.entity.SysUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
@@ -45,7 +45,7 @@ public class DataSourceConfig {
     public LocalContainerEntityManagerFactoryBean springCloudDemoEntityManagerFactory(EntityManagerFactoryBuilder builder) {
         LocalContainerEntityManagerFactoryBean em = builder
                 .dataSource(springCloudDemoDataSource())
-                .packages(User.class)
+                .packages(SysUser.class)
                 .persistenceUnit("oms")
                 .build();
         Properties properties = new Properties();

@@ -15,7 +15,7 @@ import java.util.List;
 @Entity
 @Table(name="sys_user")
 @EntityListeners(AuditingEntityListener.class)
-public class User extends AutoIDEntity{
+public class SysUser extends AutoIDEntity{
     /**
      * 账号
      */
@@ -61,7 +61,7 @@ public class User extends AutoIDEntity{
     /**
      * 一对多角色表
      */
-    private List<Role> roles ;
+    private List<SysRole> roles ;
 
     @Column(name="user_code")
     public String getUserCode() {
@@ -157,11 +157,11 @@ public class User extends AutoIDEntity{
     @JoinTable(name = "sys_user_srole",
             joinColumns = @JoinColumn(name="sys_user_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "sys_role_id",referencedColumnName = "id"))
-    public List<Role> getRoles() {
+    public List<SysRole> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<Role> roles) {
+    public void setRoles(List<SysRole> roles) {
         this.roles = roles;
     }
 }

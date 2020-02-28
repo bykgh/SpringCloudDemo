@@ -1,26 +1,24 @@
 package com.byk.account.security;
 
 
-import com.byk.account.error.MssWebResponseExceptionTranslator;
-import com.byk.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.error.WebResponseExceptionTranslator;
-import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
+import org.springframework.security.oauth2.provider.ClientDetailsService;
+import org.springframework.security.oauth2.provider.client.JdbcClientDetailsService;
+import org.springframework.security.oauth2.provider.code.AuthorizationCodeServices;
+import org.springframework.security.oauth2.provider.code.JdbcAuthorizationCodeServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
-import org.springframework.security.oauth2.provider.token.store.redis.RedisTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
 
-import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 /**
@@ -32,48 +30,31 @@ import javax.sql.DataSource;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+
+    @Autowired
     private DataSource dataSource;
 
-    @Autowired
-    private RedisConnectionFactory redisConnectionFactory;
-
-    /**
-     * 声明TokenStore实现
-     * @return
-     */
-    @Bean
-    public TokenStore tokenStore() {
-        //return new JdbcTokenStore(dataSource);
-        return new RedisTokenStore(redisConnectionFactory);
-    }
-
-    /*
-    @Bean // 声明 ClientDetails实现
-    public ClientDetailsService clientDetails() {
-        return new JdbcClientDetailsService(dataSource);
-    }
-    */
-
-    @Resource
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    private TokenStore tokenStore;
 
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private UserService userService;
+    @Autowired // 刷新令牌
+    private UserDetailsService myUserDetailsServiceImpl;
 
 
-    @Override
-    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
-        security
-                .allowFormAuthenticationForClients()
-                .tokenKeyAccess("permitAll()")
-                .checkTokenAccess("isAuthenticated()");
+    @Autowired // token管理方式，在TokenConfig类中已对添加到容器中了
+    private TokenStore tokenStore;
+
+    @Autowired // jwt转换器
+    private JwtAccessTokenConverter jwtAccessTokenConverter;
+
+
+    @Bean // 声明 ClientDetails实现
+    public ClientDetailsService clientDetails() {
+        return new JdbcClientDetailsService(dataSource);
     }
+
 
     /**
      * 概述：
@@ -94,15 +75,27 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
 
     @Override
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        //clients.withClientDetails(clientDetails());
-        clients.inMemory()
-                .withClient("web").autoApprove(true)
-                .secret(passwordEncoder.encode("123456"))
-                 .scopes("all")
-                .authorizedGrantTypes("password");
-
+        // 内存方式管理客户端信息
+        /*clients.inMemory()
+                .withClient("mengxuegu-pc") // 客户端id
+                .secret(passwordEncoder.encode("mengxuegu-secret")) // 加密，客户端密码
+                .resourceIds("product-server") // 资源id，针对的是微服务名称，商品管理
+                .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials", "refresh_token")
+                .scopes("all") // 授权范围标识，哪部分资源可访问（all只是标识，不是说所有资源）
+                .autoApprove(false) // false 跳到一个授权页面手动点击授权，true不需要手动点授权，直接响应一个授权码
+                .redirectUris("http://127.0.0.1:8080/")// 客户端回调地址
+                .accessTokenValiditySeconds(60*60*8) //访问令牌有效时长 默认为12小时
+                .refreshTokenValiditySeconds(60*60*24*60) // 刷新令牌有效时长,默认是30天
+            ;*/
+        // jdbc管理客户端
+        clients.withClientDetails(clientDetails());
     }
 
+
+    @Bean // 授权码管理策略
+    public AuthorizationCodeServices jdbcAuthorizationCodeServices() {
+        return new JdbcAuthorizationCodeServices(dataSource);
+    }
 
     /**
      * 概述：
@@ -150,11 +143,33 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      */
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(tokenStore())
-                .userDetailsService(userService)
-                .authenticationManager(authenticationManager);
-        endpoints.tokenServices(defaultTokenServices());
+        // password 要这个 AuthenticationManager 实例
+        endpoints.authenticationManager(authenticationManager);
+        // 刷新令牌时需要使用
+        endpoints.userDetailsService(myUserDetailsServiceImpl);
+        // 令牌的管理方式
+        endpoints.tokenStore(tokenStore).accessTokenConverter(jwtAccessTokenConverter);
+        // 授权码管理策略 会产生的授权码放到 oauth_code 表中，如果这个授权码已经使用了，则对应这个表中的数据就会被删除
+        endpoints.authorizationCodeServices(jdbcAuthorizationCodeServices());
+
     }
+
+    /**
+     * 令牌端点的安全配置
+     * @param security
+     * @throws Exception
+     */
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
+        // 认证后可访问 /oauth/token_key , 默认拒绝访问
+        security.tokenKeyAccess("permitAll()");
+        // 认证后可访问 /oauth/check_token , 默认拒绝访问
+        security.checkTokenAccess("isAuthenticated()");
+    }
+
+
+
+
 
     /**
      * 注意，自定义TokenServices的时候，需要设置@Primary，否则报错
@@ -182,7 +197,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
      * JwtTokenStore 不会保存任何数据，但是它在转换令牌值以及授权信息方面与 DefaultTokenServices 所扮演的角色是一样的。
      * @return
      */
-    @Bean
+   /* @Bean
     @Primary
     public DefaultTokenServices defaultTokenServices(){
         DefaultTokenServices tokenServices = new DefaultTokenServices();
@@ -194,11 +209,5 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // refresh_token默认30天
         tokenServices.setRefreshTokenValiditySeconds(60 * 60 * 24 * 7);
         return tokenServices;
-    }
-
-    @Bean
-    public WebResponseExceptionTranslator webResponseExceptionTranslator(){
-        return new MssWebResponseExceptionTranslator();
-    }
-
+    }*/
 }

@@ -1,14 +1,13 @@
 package com.byk.account.controller;
 
-import com.byk.account.entity.Permission;
-import com.byk.account.entity.Role;
-import com.byk.account.entity.User;
-import com.byk.account.service.UserService;
+import com.byk.account.entity.SysPermission;
+import com.byk.account.entity.SysRole;
+import com.byk.account.entity.SysUser;
+import com.byk.account.service.SysUserService;
 import com.byk.common.beans.PermissionBean;
 import com.byk.common.beans.Result;
 import com.byk.common.beans.RoleBean;
 import com.byk.common.beans.UserBean;
-import com.byk.common.common.AccountCommon;
 import com.byk.common.enums.ResultCode;
 import com.byk.common.util.BeanUtil;
 import org.slf4j.Logger;
@@ -39,7 +38,7 @@ public class UserController {
     private ConsumerTokenServices consumerTokenServices;
 
     @Autowired
-    private UserService userService;
+    private SysUserService userService;
 
     /**
      * 权限查询
@@ -58,15 +57,11 @@ public class UserController {
      */
     @DeleteMapping(value = "/exit")
     public Result revokeToken(String access_token) {
-        Result result = new Result();
         if (consumerTokenServices.revokeToken(access_token)) {
-            result.setCode(ResultCode.SUCCESS.getCode());
-            result.setMessage("注销成功");
+            return Result.success("注销成功");
         } else {
-            result.setCode(ResultCode.FAILED.getCode());
-            result.setMessage("注销失败");
+            return Result.build(ResultCode.FAILED.getCode(),"注销失败");
         }
-        return result;
     }
 
     /**
@@ -78,17 +73,17 @@ public class UserController {
          UserBean userBean = new UserBean();
          org.springframework.security.core.userdetails.User userdetails = (org.springframework.security.core.userdetails.User)SecurityContextHolder.getContext().getAuthentication().getPrincipal();
          String userCode = userdetails.getUsername();
-         User user =  userService.findByUserCode(userCode);
+         SysUser user =  userService.findByUserCode(userCode);
          BeanUtils.copyProperties(user,userBean);
-         List<Role> roles = user.getRoles();
+         List<SysRole> roles = user.getRoles();
          List<RoleBean> roleBeans =new ArrayList<>();
          List<PermissionBean> permissionBeans = new ArrayList<>();
-         for (Role role:roles) {
+         for (SysRole role:roles) {
              RoleBean roleBean = new RoleBean();
              BeanUtils.copyProperties(role,roleBean);
              roleBeans.add(roleBean);
-             List<Permission> permissions = role.getPermission();
-             for (Permission permission : permissions) {
+             List<SysPermission> permissions = role.getPermission();
+             for (SysPermission permission : permissions) {
                  if(!permission.getShow()){
                      continue;
                  }

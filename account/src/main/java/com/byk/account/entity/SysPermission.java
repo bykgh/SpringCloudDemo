@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Entity
 @Table(name="sys_permission")
 @EntityListeners(AuditingEntityListener.class)
-public class Permission extends AutoIDEntity{
+public class SysPermission extends AutoIDEntity{
 
     /**
      * 资源名称

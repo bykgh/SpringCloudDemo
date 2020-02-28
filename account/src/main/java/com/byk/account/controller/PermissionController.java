@@ -3,8 +3,8 @@ package com.byk.account.controller;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.bean.copier.CopyOptions;
 import com.alibaba.fastjson.JSONObject;
-import com.byk.account.entity.Permission;
-import com.byk.account.service.PermissionService;
+import com.byk.account.entity.SysPermission;
+import com.byk.account.service.SysPermissionService;
 import com.byk.common.beans.PermissionBean;
 import com.byk.common.beans.Result;
 import com.byk.common.enums.ResultCode;
@@ -25,7 +25,7 @@ import java.util.List;
 public class PermissionController {
 
     @Autowired
-    private PermissionService permissionService;
+    private SysPermissionService permissionService;
 
     /**
      * 查询资源列表
@@ -33,12 +33,8 @@ public class PermissionController {
      */
     @RequestMapping("/findAllPermission")
     public Result findAllPermission(){
-        List<Permission> permissionsList = permissionService.findAllPermissionList();
-        Result result = new Result();
-        result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage(ResultCode.SUCCESS.getMessage());
-        result.setData(JSONObject.toJSONString(permissionsList));
-        return result;
+        List<SysPermission> permissionsList = permissionService.findAllPermissionList();
+        return Result.build(ResultCode.SUCCESS.getCode(),ResultCode.SUCCESS.getMessage(),JSONObject.toJSONString(permissionsList));
     }
 
     /**
@@ -48,14 +44,10 @@ public class PermissionController {
      */
     @RequestMapping("/savePermission")
     public Result savePermission(PermissionBean permissionBean){
-        Permission permission = new Permission();
+        SysPermission permission = new SysPermission();
         BeanUtil.copyProperties(permissionBean,permission);
         permissionService.save(permission);
-
-        Result result = new Result();
-        result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage("保存成功");
-        return result;
+        return Result.success("保存成功");
     }
 
     /**
@@ -65,13 +57,9 @@ public class PermissionController {
      */
     @RequestMapping("/updatePermission")
     public Result updatePermission(PermissionBean permissionBean){
-        Permission permission = permissionService.findById(permissionBean.getId());
+        SysPermission permission = permissionService.findById(permissionBean.getId());
         BeanUtil.copyProperties(permissionBean,permission, CopyOptions.create().setIgnoreNullValue(false));
         permissionService.save(permission);
-
-        Result result = new Result();
-        result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage("保存成功");
-        return result;
+        return Result.success("保存成功");
     }
 }

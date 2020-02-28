@@ -1,6 +1,6 @@
 package com.byk.account.bean;
 
-import com.byk.account.entity.User;
+import com.byk.account.entity.SysUser;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
@@ -16,7 +16,7 @@ import java.util.Set;
  * 用于解析用户权限json字符串的bean
  * @author yikai.bi
  */
-public class CustomUserDetails extends User implements UserDetails {
+public class CustomUserDetails extends SysUser implements UserDetails {
 
     private static final long serialVersionUID = 1702923242319850756L;
 
@@ -26,7 +26,7 @@ public class CustomUserDetails extends User implements UserDetails {
     private final boolean accountNonLocked;
     private final Set<GrantedAuthority> authorities;
 
-    public CustomUserDetails(User user, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
+    public CustomUserDetails(SysUser user, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities) {
         if (user != null
                 && !StringUtils.isBlank(user.getUsername())
                 && !StringUtils.isBlank(user.getPassword())) {

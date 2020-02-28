@@ -9,7 +9,7 @@ import java.util.List;
  */
 @Entity
 @Table(name="sys_role")
-public class Role extends AutoIDEntity{
+public class SysRole extends AutoIDEntity{
 
     /**
      * 角色名称
@@ -29,7 +29,7 @@ public class Role extends AutoIDEntity{
     /**
      * 资源列表
      */
-    private List<Permission> permission;
+    private List<SysPermission> permission;
 
     @Column(name="name")
     public String getName() {
@@ -53,11 +53,11 @@ public class Role extends AutoIDEntity{
     @JoinTable(name = "sys_role_permission",
             joinColumns = @JoinColumn(name="sys_role_id",referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "sys_permission_id",referencedColumnName = "id"))
-    public List<Permission> getPermission() {
+    public List<SysPermission> getPermission() {
         return permission;
     }
 
-    public void setPermission(List<Permission> permission) {
+    public void setPermission(List<SysPermission> permission) {
         this.permission = permission;
     }
 

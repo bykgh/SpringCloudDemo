@@ -1,16 +1,12 @@
 package com.byk.account.security;
 
-import com.byk.account.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -18,13 +14,17 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  * security 配置
  * @author yikai.bi
  */
-@Configuration
 @EnableWebSecurity
-@Order(2)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
-    private UserService userService;
+    private UserDetailsService myUserDetailsServiceImpl;
+
+
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(myUserDetailsServiceImpl);
+    }
 
     /**
      * 不定义没有password grant_type,密码模式需要AuthenticationManager支持
@@ -39,12 +39,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
 
-
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
         //return new NoEncryptPasswordEncoder();
     }
+
 
     /**
      * 如果你的应用程序中既包含授权服务又包含资源服务的话，
@@ -62,35 +62,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
      * @param http
      * @throws Exception
 
-        protected void configure(HttpSecurity http) throws Exception {
-            http .authorizeRequests().antMatchers("/login").permitAll().and()
-                    // default protection for all resources (including /oauth/authorize)
-                    .authorizeRequests() .anyRequest().hasRole("USER");
-            // ... more configuration, e.g. for form login
-        }
-     */
-    @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.requestMatchers().antMatchers("/oauth/**")
+    http .authorizeRequests().antMatchers("/login").permitAll().and()
+    // default protection for all resources (including /oauth/authorize)
+    .authorizeRequests() .anyRequest().hasRole("USER");
+    // ... more configuration, e.g. for form login
+    }
+     */
+   // @Override
+   // protected void configure(HttpSecurity http) throws Exception {
+       /* http.formLogin()
+                .loginPage("/login")
                 .and()
                 .authorizeRequests()
-                .antMatchers("/oauth/**").authenticated()
-                .and()
-                .csrf().disable();
-    }
+                .antMatchers("/login").permitAll()
+                .anyRequest()
+                .authenticated()
+                .and().csrf().disable().cors();*/
+        /*
+         * 当前将所有请求放行,交给资源配置类进行资源权限判断
+         * 因为默认情况下会拦截所有请求
+         */
+        //http.authorizeRequests().anyRequest().permitAll();
+   // }
 
-
-    @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userService).passwordEncoder(passwordEncoder());
-    }
-
-    @Bean
-    public DaoAuthenticationProvider authenticationProvider() {
-        DaoAuthenticationProvider authProvider
-                = new DaoAuthenticationProvider();
-        authProvider.setUserDetailsService(userService);
-        authProvider.setPasswordEncoder(passwordEncoder());
-        return authProvider;
-    }
 }

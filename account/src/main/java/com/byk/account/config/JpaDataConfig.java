@@ -1,6 +1,6 @@
 package com.byk.account.config;
 
-import com.byk.account.dao.UserDao;
+import com.byk.account.dao.SysUserDao;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackageClasses = UserDao.class,
+        basePackageClasses = SysUserDao.class,
         entityManagerFactoryRef = "springCloudDemoEntityManagerFactory",
         transactionManagerRef = "springCloudDemoTransactionManager"
 )

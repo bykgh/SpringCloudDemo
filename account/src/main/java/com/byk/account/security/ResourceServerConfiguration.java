@@ -1,9 +1,6 @@
 package com.byk.account.security;
 
-import org.springframework.context.annotation.Configuration;
-import org.springframework.core.annotation.Order;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.ResourceServerConfigurerAdapter;
 
 import javax.servlet.http.HttpServletResponse;
@@ -26,9 +23,8 @@ import javax.servlet.http.HttpServletResponse;
  * @EnableResourceServer 注解自动增加了一个类型为 OAuth2AuthenticationProcessingFilter 的过滤器链，
  * @author  yikai.bi
  */
-@Configuration
-@EnableResourceServer
-@Order(3)
+/*@Configuration
+@EnableResourceServer*/
 public class ResourceServerConfiguration extends ResourceServerConfigurerAdapter {
 
     @Override
