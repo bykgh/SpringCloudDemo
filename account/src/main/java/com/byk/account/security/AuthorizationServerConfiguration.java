@@ -77,8 +77,8 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
         // 内存方式管理客户端信息
         /*clients.inMemory()
-                .withClient("mengxuegu-pc") // 客户端id
-                .secret(passwordEncoder.encode("mengxuegu-secret")) // 加密，客户端密码
+                .withClient("yikai-pc") // 客户端id
+                .secret(passwordEncoder.encode("yikai-secret")) // 加密，客户端密码
                 .resourceIds("product-server") // 资源id，针对的是微服务名称，商品管理
                 .authorizedGrantTypes("authorization_code", "password", "implicit", "client_credentials", "refresh_token")
                 .scopes("all") // 授权范围标识，哪部分资源可访问（all只是标识，不是说所有资源）

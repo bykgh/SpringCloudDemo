@@ -9,7 +9,7 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 import org.springframework.security.oauth2.provider.token.store.KeyStoreKeyFactory;
 
 /**
- * @Auther: 梦学谷 www.mengxuegu.com
+ * @Auther: yikai.bi
  */
 @Configuration
 public class TokenConfig {
@@ -17,7 +17,7 @@ public class TokenConfig {
     //@Autowired 采用redis管理token
     //private RedisConnectionFactory redisConnectionFactory;
 
-    public static final String SIGNING_KEY = "mengxeugu-key";
+    public static final String SIGNING_KEY = "yikai-key";
 
     @Bean
     public JwtAccessTokenConverter jwtAccessTokenConverter() {

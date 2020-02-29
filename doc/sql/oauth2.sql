@@ -62,7 +62,7 @@ CREATE TABLE `oauth_approvals` (
 -- ----------------------------
 DROP TABLE IF EXISTS `oauth_client_details`;
 CREATE TABLE `oauth_client_details` (
-  `client_id` varchar(128) NOT NULL COMMENT '客户端id（如：mengxuegu_client',
+  `client_id` varchar(128) NOT NULL COMMENT '客户端id（如：ykai_client',
   `resource_ids` varchar(128) DEFAULT NULL,
   `client_secret` varchar(128) DEFAULT NULL COMMENT '客户端密码（要加密后存储)',
   `scope` varchar(128) DEFAULT NULL COMMENT '客户端授权范all,write,read)',
@@ -79,7 +79,7 @@ CREATE TABLE `oauth_client_details` (
 -- ----------------------------
 -- Records of oauth_client_details
 -- ----------------------------
-INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`) VALUES ('mengxuegu-pc', 'product-server', '$2a$10$VcUHxmgnxBTdB9XNdhoOWujC.lFZ0rO1UizqMAS0GU6WAerFviX.a', 'all,PRODUCT_API', 'authorization_code,password,implicit,client_credentials,refresh_token', 'http://www.mengxuegu.com/', NULL, '50000', NULL, NULL, 'false');
+INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`) VALUES ('yikai-pc', 'product-server', '$2a$10$VcUHxmgnxBTdB9XNdhoOWujC.lFZ0rO1UizqMAS0GU6WAerFviX.a', 'all,PRODUCT_API', 'authorization_code,password,implicit,client_credentials,refresh_token', 'http://www.baidu.com/', NULL, '50000', NULL, NULL, 'false');
 INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`) VALUES ('client1', '', '$2a$10$AodcXpujNILcZAQ.7cQ0b.Bm4klRumapoFBu7uyQ/ZV9Nu9F5fE3y', 'MEMBER_READ,MEMBER_WRITE', 'authorization_code,refresh_token', 'http://localhost:9001/login', NULL, '50000', NULL, NULL, 'true');
 INSERT INTO `oauth_client_details` (`client_id`, `resource_ids`, `client_secret`, `scope`, `authorized_grant_types`, `web_server_redirect_uri`, `authorities`, `access_token_validity`, `refresh_token_validity`, `additional_information`, `autoapprove`) VALUES ('client2', '', '$2a$10$AodcXpujNILcZAQ.7cQ0b.Bm4klRumapoFBu7uyQ/ZV9Nu9F5fE3y', 'MEMBER_READ', 'authorization_code,refresh_token', 'http://localhost:9002/login', NULL, '50000', NULL, NULL, 'true');
 

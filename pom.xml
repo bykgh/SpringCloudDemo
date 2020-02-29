@@ -5,7 +5,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.2.0.RELEASE</version>
+        <version>2.0.5.RELEASE</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.byk</groupId>
@@ -114,11 +114,11 @@
             <version>${druid.version}</version>
         </dependency>
         <!--spring-security-oauth2、spring-security-jwt等-->
-        <dependency>
+       <!-- <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>
             <artifactId>spring-security-oauth2-autoconfigure</artifactId>
             <version>${oauth2-autoconfigure.version}</version>
-        </dependency>
+        </dependency>-->
         <!-- kaptcha 用于图形验证码 -->
         <dependency>
             <groupId>com.github.penggle</groupId>

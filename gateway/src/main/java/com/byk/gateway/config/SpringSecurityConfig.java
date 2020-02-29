@@ -8,7 +8,7 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
  * @author yikai.bi
  */
 @EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     /**
      * 当前将所有请求放行,交给资源配置类进行资源权限判断
@@ -20,5 +20,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests().anyRequest().permitAll();
     }
-
 }
