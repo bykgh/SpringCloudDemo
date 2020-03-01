@@ -52,7 +52,7 @@ public class MyUserDetailsServiceImpl implements UserDetailsService {
         List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
         if (!CollectionUtils.isEmpty(permissionList)) {
             for (SysPermission sysPermission : permissionList) {
-                authorityList.add(new SimpleGrantedAuthority(sysPermission.getPercode()));
+                authorityList.add(new SimpleGrantedAuthority(sysPermission.getCode()));
             }
         }
         User user = new User(sysUser.getUsername(), passwordEncoder.encode(sysUser.getPassword()), authorityList);

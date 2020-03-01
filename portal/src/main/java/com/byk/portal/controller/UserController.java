@@ -3,7 +3,6 @@ package com.byk.portal.controller;
 import com.alibaba.fastjson.JSON;
 import com.byk.common.beans.Result;
 import com.byk.common.beans.UserBean;
-import com.byk.common.enums.ResultCode;
 import com.byk.portal.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -25,10 +24,6 @@ public class UserController {
     @PreAuthorize("hasAnyAuthority('findUser')")
     public @ResponseBody String getUserInfo(){
        UserBean userBean =  userService.findUser();
-       Result result = new Result();
-       result.setCode(ResultCode.SUCCESS.getCode());
-       result.setData(userBean);
-       result.setMessage("成功");
-       return JSON.toJSONString(result);
+       return JSON.toJSONString(Result.success("成功",userBean));
     }
 }

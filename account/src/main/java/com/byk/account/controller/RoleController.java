@@ -28,7 +28,6 @@ public class RoleController {
 
     private static final Logger logger = LoggerFactory.getLogger(RoleController.class);
 
-
     @Autowired
     public SysRoleService roleService;
 
@@ -37,30 +36,20 @@ public class RoleController {
         SysRole role = new SysRole();
         BeanUtil.copyProperties(roleBean,role, CopyOptions.create().setIgnoreNullValue(false));
         roleService.save(role);
-        Result result = new Result();
-        result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage("添加角色信息成功");
-        return result;
+        return Result.success("添加角色信息成功");
     }
 
     @RequestMapping("/updateRole")
     public Result updateRole(RoleBean roleBean){
         SysRole role = roleService.findById(roleBean.getId());
         BeanUtil.copyProperties(roleBean,role, CopyOptions.create().setIgnoreNullValue(false));
-        Result result = new Result();
-        result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage("更新角色信息成功");
-        return result;
+        return Result.success("更新角色信息成功");
     }
 
     @RequestMapping("/findAllRole")
     public Result findAllRole(){
         List<SysRole> roleList = roleService.findAllRole();
-        Result result = new Result();
-        result.setCode(ResultCode.SUCCESS.getCode());
-        result.setMessage(ResultCode.SUCCESS.getMessage());
-        result.setData(JSONObject.toJSONString(roleList));
-        return result;
+        return Result.success(ResultCode.SUCCESS.getMessage(),JSONObject.toJSONString(roleList));
     }
 
 }

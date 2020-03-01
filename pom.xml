@@ -108,11 +108,11 @@
             <version>${commons-collections.version}</version>
         </dependency>
         <!--druid连接池-->
-        <dependency>
+       <!-- <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>druid</artifactId>
             <version>${druid.version}</version>
-        </dependency>
+        </dependency>-->
         <!--spring-security-oauth2、spring-security-jwt等-->
        <!-- <dependency>
             <groupId>org.springframework.security.oauth.boot</groupId>

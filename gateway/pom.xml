@@ -31,13 +31,6 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-zuul</artifactId>
         </dependency>
-
-        <dependency>
-            <groupId>com.byk</groupId>
-            <artifactId>core</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-        </dependency>
-
         <!--oauth2 start-->
         <dependency>
             <groupId>org.springframework.cloud</groupId>

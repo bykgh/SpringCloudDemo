@@ -84,10 +84,6 @@ public class UserController {
              roleBeans.add(roleBean);
              List<SysPermission> permissions = role.getPermission();
              for (SysPermission permission : permissions) {
-                 if(!permission.getShow()){
-                     continue;
-                 }
-
                  PermissionBean permissionBean = new PermissionBean();
                  BeanUtil.copyProperties(permission,permissionBean);
                  if(!permissionBeans.contains(permissionBean)){
