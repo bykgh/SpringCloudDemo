@@ -22,11 +22,8 @@ maven
 jar
 
 ### 技术选型：  
-#### 前端（待完善）：  
- jquery  
- bootstarp 3.3  
- thymeleaf
- html5shiv -- IE 识别并支持 HTML5 元素
+#### 前端：  
+基于AdminLTE进行二次开发
  
 #### 后端：  
 spring cloud   
