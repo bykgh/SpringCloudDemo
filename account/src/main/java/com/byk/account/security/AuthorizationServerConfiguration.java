@@ -6,7 +6,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
@@ -30,9 +29,6 @@ import javax.sql.DataSource;
 public class AuthorizationServerConfiguration extends AuthorizationServerConfigurerAdapter {
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private DataSource dataSource;
 
 
@@ -40,7 +36,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
     private AuthenticationManager authenticationManager;
 
     @Autowired // 刷新令牌
-    private UserDetailsService myUserDetailsServiceImpl;
+    private UserDetailsService customUserDetailsService;
 
 
     @Autowired // token管理方式，在TokenConfig类中已对添加到容器中了
@@ -146,7 +142,7 @@ public class AuthorizationServerConfiguration extends AuthorizationServerConfigu
         // password 要这个 AuthenticationManager 实例
         endpoints.authenticationManager(authenticationManager);
         // 刷新令牌时需要使用
-        endpoints.userDetailsService(myUserDetailsServiceImpl);
+        endpoints.userDetailsService(customUserDetailsService);
         // 令牌的管理方式
         endpoints.tokenStore(tokenStore).accessTokenConverter(jwtAccessTokenConverter);
         // 授权码管理策略 会产生的授权码放到 oauth_code 表中，如果这个授权码已经使用了，则对应这个表中的数据就会被删除

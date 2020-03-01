@@ -1,4 +1,4 @@
-package com.byk.account.error;
+package com.byk.account.exception;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;

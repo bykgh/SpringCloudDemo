@@ -1,10 +1,14 @@
 package com.byk.account.entity;
 
+import com.google.common.collect.Lists;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -15,7 +19,7 @@ import java.util.List;
 @Entity
 @Table(name="sys_user")
 @EntityListeners(AuditingEntityListener.class)
-public class SysUser extends AutoIDEntity{
+public class SysUser extends AutoIDEntity implements UserDetails {
     /**
      * 账号
      */
@@ -35,19 +39,19 @@ public class SysUser extends AutoIDEntity{
      * 账户是否过期
      * 帐户是否过期(1 未过期，0已过期)
      */
-    private boolean isNonExpired;
+    private boolean isAccountNonExpired;
 
     /**
      * 是否锁定
      * (1 未锁定，0已锁定)
      */
-    private boolean isNonLocked;
+    private boolean isAccountNonLocked;
 
     /**
      * 密码是否过期
      * (true(1) 未过期，false(0)已过期)
      */
-    private boolean isPwdNonExpired;
+    private boolean isCredentialsNonExpired;
 
     /**
      * 帐户是否可用(true(1) 可用，false(0)已删除)
@@ -88,6 +92,11 @@ public class SysUser extends AutoIDEntity{
      */
     @LastModifiedDate
     private Date updateTime;
+
+    /**
+     * 它不是sys_user表中的属性，所以要进行标识，不然mybatis-plus会报错
+     */
+    private Collection<? extends GrantedAuthority> authorities;
 
     /**
      * 一对多角色表
@@ -140,30 +149,33 @@ public class SysUser extends AutoIDEntity{
     }
 
     @Column(name = "is_non_expired")
-    public boolean isNonExpired() {
-        return isNonExpired;
+    @Override
+    public boolean isAccountNonExpired() {
+        return isAccountNonExpired;
     }
 
-    public void setNonExpired(boolean nonExpired) {
-        isNonExpired = nonExpired;
+    public void setAccountNonExpired(boolean accountNonExpired) {
+        isAccountNonExpired = accountNonExpired;
     }
 
     @Column(name = "is_non_locked")
-    public boolean isNonLocked() {
-        return isNonLocked;
+    @Override
+    public boolean isAccountNonLocked() {
+        return isAccountNonLocked;
     }
 
-    public void setNonLocked(boolean nonLocked) {
-        isNonLocked = nonLocked;
+    public void setAccountNonLocked(boolean accountNonLocked) {
+        isAccountNonLocked = accountNonLocked;
     }
 
     @Column(name = "is_pwd_non_expired")
-    public boolean isPwdNonExpired() {
-        return isPwdNonExpired;
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return isCredentialsNonExpired;
     }
 
-    public void setPwdNonExpired(boolean pwdNonExpired) {
-        isPwdNonExpired = pwdNonExpired;
+    public void setCredentialsNonExpired(boolean credentialsNonExpired) {
+        isCredentialsNonExpired = credentialsNonExpired;
     }
 
     @Column(name = "is_enabled")
@@ -248,5 +260,30 @@ public class SysUser extends AutoIDEntity{
 
     public void setRoles(List<SysRole> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    @Transient
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return authorities;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
+    }
+
+    /**
+     * 封装当前用户拥有的权限资源对象
+     */
+
+    private List<SysPermission> permissions = Lists.newArrayList();
+
+    @Transient
+    public List<SysPermission> getPermissions() {
+        return permissions;
+    }
+
+    public void setPermissions(List<SysPermission> permissions) {
+        this.permissions = permissions;
     }
 }
