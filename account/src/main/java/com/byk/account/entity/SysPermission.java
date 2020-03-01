@@ -1,11 +1,14 @@
 package com.byk.account.entity;
 
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EntityListeners;
 import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * 资源表 实体类
@@ -17,67 +20,49 @@ import javax.persistence.Table;
 public class SysPermission extends AutoIDEntity{
 
     /**
-     * 资源名称
+     * 名称
      */
     private String name;
-
     /**
-     *资源类型：MENU,BUTTON
+     * 类型：
+     * 菜单：1，按钮：2
      */
-    private String type;
-
+    private Integer type;
     /**
-     * 请求方式
-     * get、post 等
+     * 权限编码
      */
-    private String method;
-
-    //service_prefix
+    private String code;
     /**
-     * 服务前缀
-     */
-    private String servicePrefix;
-
-    /**
-     * 网关服务地址
-     * zuul_prefix
-     */
-    private String zuulPrefix;
-
-    /**
-     *访问url地址
+     * url
      */
     private String url;
+    /**
+     * 父资源id,给它初始值 0
+     * 新增和修改页面上默认的父资源id
+     */
+    private Long parentId = 0L ;
 
     /**
-     *权限代码字符串
+     * 图标
      */
-    private String percode;
+    private String icon;
+    /**
+     * 备注
+     */
+    private String remark;
 
     /**
-     *父结点id
+     * 创建时间
      */
-    private Integer parentid;
+    @CreatedDate
+    private Date createDate;
 
     /**
-     *父结点id列表串
+     * 更新时间
      */
-    private String parentids;
+    @LastModifiedDate
+    private Date updateDate;
 
-    /**
-     *排序号
-     */
-    private String sortstring;
-
-    /**
-     *是否可用,1：可用，0不可用
-     */
-    private String available;
-
-    /**
-     * 是否展示  TRUE 展示  FALSE 不展示
-     */
-    private Boolean show;
 
     @Column(name="name")
     public String getName() {
@@ -89,40 +74,24 @@ public class SysPermission extends AutoIDEntity{
     }
 
     @Column(name="type")
-    public String getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
-    @Column(name="method")
-    public String getMethod() {
-        return method;
+
+    @Column(name="code")
+    public String getCode() {
+        return code;
     }
 
-    public void setMethod(String method) {
-        this.method = method;
+    public void setCode(String code) {
+        this.code = code;
     }
 
-    @Column(name="service_prefix")
-    public String getServicePrefix() {
-        return servicePrefix;
-    }
-
-    public void setServicePrefix(String servicePrefix) {
-        this.servicePrefix = servicePrefix;
-    }
-
-    @Column(name="zuul_prefix")
-    public String getZuulPrefix() {
-        return zuulPrefix;
-    }
-
-    public void setZuulPrefix(String zuulPrefix) {
-        this.zuulPrefix = zuulPrefix;
-    }
 
     @Column(name="url")
     public String getUrl() {
@@ -133,57 +102,48 @@ public class SysPermission extends AutoIDEntity{
         this.url = url;
     }
 
-    @Column(name="permission_code")
-    public String getPercode() {
-        return percode;
-    }
-
-    public void setPercode(String percode) {
-        this.percode = percode;
-    }
-
     @Column(name="parent_id")
-    public Integer getParentid() {
-        return parentid;
+    public Long getParentId() {
+        return parentId;
     }
 
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
     }
 
-    @Column(name="parent_ids")
-    public String getParentids() {
-        return parentids;
+    @Column(name="icon")
+    public String getIcon() {
+        return icon;
     }
 
-    public void setParentids(String parentids) {
-        this.parentids = parentids;
+    public void setIcon(String icon) {
+        this.icon = icon;
     }
 
-    @Column(name="sortstring")
-    public String getSortstring() {
-        return sortstring;
+    @Column(name="remark")
+    public String getRemark() {
+        return remark;
     }
 
-    public void setSortstring(String sortstring) {
-        this.sortstring = sortstring;
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 
-    @Column(name="available")
-    public String getAvailable() {
-        return available;
+    @Column(name="create_date")
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setAvailable(String available) {
-        this.available = available;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    @Column(name="show")
-    public Boolean getShow() {
-        return show;
+    @Column(name="update_date")
+    public Date getUpdateDate() {
+        return updateDate;
     }
 
-    public void setShow(Boolean show) {
-        this.show = show;
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
     }
 }

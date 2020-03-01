@@ -32,6 +32,42 @@ public class SysUser extends AutoIDEntity{
     private String password;
 
     /**
+     * 账户是否过期
+     * 帐户是否过期(1 未过期，0已过期)
+     */
+    private boolean isNonExpired;
+
+    /**
+     * 是否锁定
+     * (1 未锁定，0已锁定)
+     */
+    private boolean isNonLocked;
+
+    /**
+     * 密码是否过期
+     * (true(1) 未过期，false(0)已过期)
+     */
+    private boolean isPwdNonExpired;
+
+    /**
+     * 帐户是否可用(true(1) 可用，false(0)已删除)
+     * 设置默认值为true，新增用户可用
+     */
+    private boolean isEnabled = true;
+    /**
+     * 昵称
+     */
+    private String nickName;
+    /**
+     * 手机号
+     */
+    private String mobile;
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**
      * 所属源
      */
     private String source;
@@ -40,11 +76,6 @@ public class SysUser extends AutoIDEntity{
      * 盐
      */
     private String slat;
-
-    /**
-     * 是否锁定
-     */
-    private String locked;
 
     /**
      * 创建时间
@@ -108,13 +139,67 @@ public class SysUser extends AutoIDEntity{
         this.slat = slat;
     }
 
-    @Column(name = "locked")
-    public String getLocked() {
-        return locked;
+    @Column(name = "is_non_expired")
+    public boolean isNonExpired() {
+        return isNonExpired;
     }
 
-    public void setLocked(String locked) {
-        this.locked = locked;
+    public void setNonExpired(boolean nonExpired) {
+        isNonExpired = nonExpired;
+    }
+
+    @Column(name = "is_non_locked")
+    public boolean isNonLocked() {
+        return isNonLocked;
+    }
+
+    public void setNonLocked(boolean nonLocked) {
+        isNonLocked = nonLocked;
+    }
+
+    @Column(name = "is_pwd_non_expired")
+    public boolean isPwdNonExpired() {
+        return isPwdNonExpired;
+    }
+
+    public void setPwdNonExpired(boolean pwdNonExpired) {
+        isPwdNonExpired = pwdNonExpired;
+    }
+
+    @Column(name = "is_enabled")
+    public boolean isEnabled() {
+        return isEnabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        isEnabled = enabled;
+    }
+
+    @Column(name = "nick_name")
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
+    }
+
+    @Column(name = "mobile")
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     @Column(name="create_time", columnDefinition = "DATE")
