@@ -12,7 +12,7 @@ import java.io.IOException;
 
 
 /**
- * @Auther: 梦学谷 www.mengxuegu.com
+ * @Auther: yikai.bi
  */
 @Configuration
 public class TokenConfig {

@@ -10,7 +10,7 @@ import org.springframework.security.oauth2.provider.token.TokenStore;
 
 /**
  * 当前类用于管理所有的资源: 认证服务器资源,商品资源服务器
- * @Auther: 梦学谷 www.mengxuegu.com
+ * @Auther: yikai.bi
  */
 @Configuration
 public class ResourceServerConfig {
